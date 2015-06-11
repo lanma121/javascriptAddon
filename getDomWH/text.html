@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>获取浏览器的宽高</title>
+    <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
+</head>
+<body style="background: bisque;height: 500px;width: 2000px">
+<div style="background: lightblue;height: 300px;width: 500px"></div>
+</body>
+</html>
+<script type="text/javascript">
+    /**
+     *
+     * CSS中的margin属性，与clientWidth、offsetWidth、clientHeight、offsetHeight均无关
+     * 在Netscape下需要使用Window的属性；在IE下需要深入Document内部对body进行检测；在DOM环境下，若要得到窗口的尺寸，需要注意根元素的尺寸，而不是元素
+     * Window对象的innerWidth属性包含当前窗口的内部宽度。Window对象的innerHeight属性包含当前窗口的内部高度
+     * Document对象的body属性对应HTML文档的标签。Document对象的documentElement属性则表示HTML文档的根节点。
+     *
+     * IE6.0、FF1.06+：
+         clientWidth = width + padding
+         clientHeight = height + padding
+         offsetWidth = width + padding + border
+         offsetHeight = height + padding + border
+         IE5.0/5.5：
+         clientWidth = width - border
+         clientHeight = height - border
+         offsetWidth = width
+         offsetHeight = height
+     *
+     *
+     */
+
+
+//    document.write("浏览器："+navigator.userAgent+"</br>");
+    console.log("浏览器："+navigator.userAgent+"</br>");
+    //document.body.clientHeight表示HTML文档所在窗口的当前高度。document.body.clientWidth表示HTML文档所在窗口的当前宽度
+    //chrome,firfox,IE,360，opera 与document.body.offset等同，
+//    document.write("document.body.client------>BODY对象宽度 :"+document.body.clientWidth+",BODY对象高度 :"+document.body.clientHeight+"</br>");
+    console.log("document.body.client------>BODY对象宽度 :"+document.body.clientWidth+",BODY对象高度 :"+document.body.clientHeight+"</br>");
+    //chrome,firfox,IE,360,opera body包含的dom的宽高（去掉dom与body的间隙的body高宽），
+    //    document.write("document.body.offset------>   包括边线的宽:"+document.body.offsetWidth+",包括边线的高:"+document.body.offsetHeight+"</br>");
+    console.log("document.body.offset------>   包括边线的宽:"+document.body.offsetWidth+",包括边线的高:"+document.body.offsetHeight+"</br>");
+
+    //chrome,firfox,ie9,360,opera body可见区域的高宽，与document.documentElement.client不同的是，包含滚动条
+//    document.write("window.inner------>    :"+window.innerWidth+",:"+window.innerHeight+"</br>");
+    console.log("window.inner------>    :"+window.innerWidth+",:"+window.innerHeight+"</br>");
+    //chrome,firfox,IE,360,opera body可见区域的宽高（不包含滚动条） FireFox,Opera页面对象宽度（即BODY对象宽度加上Margin宽)
+//    document.write("document.documentElement.client------>  可见区域宽度:"+document.documentElement.clientWidth+",可见区域高度:"+document.documentElement.clientHeight+"</br>");
+    console.log("document.documentElement.client------>  可见区域宽度:"+document.documentElement.clientWidth+",可见区域高度:"+document.documentElement.clientHeight+"</br>");
+   //chrome,360,opera 为body 的宽高(不包含滚动条)
+   //firfox,IE body容纳的dom的高宽与document.body.offset，document.body.client等同；
+//    document.write("document.body.scroll------>   网页正文全文宽:"+document.body.scrollWidth+",网页正文全文高:"+document.body.scrollHeight+"</br>");
+    console.log("document.body.scroll------>   网页正文全文宽:"+document.body.scrollWidth+",网页正文全文高:"+document.body.scrollHeight+"</br>");
+    //chrome 网页被卷去的高度： document.body.scrollTop = document.body.scrollHeight - document.documentElement.clientHeight
+//    document.write("document.body.scroll------>   网页被卷去的高:"+document.body.scrollTop+",网页被卷去的左:"+document.body.scrollLeft+"</br>");
+    console.log("document.body.scroll------>   网页被卷去的高:"+document.body.scrollTop+",网页被卷去的左:"+document.body.scrollLeft+"</br>");
+    //chrome,ie,firfox,360,opera
+    console.log("jQuery返回第一个匹配元素相对于文档的位置:"+$('body').offset().left+","+$("body").offset().top);
+    //chrome 页被卷去的高宽 ，等同于document.body.scrollTop
+    console.log("jQuery返回或设置匹配元素的滚动条的位置。:"+$('body').scrollLeft()+","+$('body').scrollTop());
+    //ie浏览器标题栏的高宽,
+    // 360 body 到document的高宽
+//    document.write("window.screen------>   网页正文部分上:"+window.screenTop+",网页正文部分左："+window.screenLeft+"</br>");
+    console.log("window.screen------>   网页正文部分上:"+window.screenTop+",网页正文部分左："+window.screenLeft+"</br>");
+//    document.write("window.screen------>  屏幕分辨率的高："+window.screen.height+",屏幕分辨率的宽："+window.screen.width+"</br>");
+    console.log("window.screen------>  屏幕分辨率的高："+window.screen.height+",屏幕分辨率的宽："+window.screen.width+"</br>");
+    //chrome,firfox,ie，360,opera 整个浏览器的高宽（桌面去掉底边栏的高宽）
+//    document.write("window.screen.avail------>  屏幕可用工作区高度："+window.screen.availHeight+"屏幕可用工作区宽度："+window.screen.availWidth+"</br>");
+    console.log("window.screen.avail------>  屏幕可用工作区高度："+window.screen.availHeight+"屏幕可用工作区宽度："+window.screen.availWidth+"</br>");
+    //document.write("event.offsetX ------>  相对容器的水平坐标:"+event.offsetX +"相对容器的垂直坐标"+event.offsetY+"</br>");
+//    document.write("垂直方向滚动的值:"+document.documentElement.scrollTop +"</br>");
+    console.log("垂直方向滚动的值:"+document.documentElement.scrollTop +"</br>");
+    //document.write("event.offsetX ------>  相对文档的水平座标+垂直方向滚动的量 :"+event.clientX+document.documentElement.scrollTop+"</br>");
+    /**
+    /**
+     * HTML精确定位:scrollLeft,scrollWidth,clientWidth,offsetWidth
+         scrollHeight: 获取对象的滚动高度。
+         scrollLeft:设置或获取位于对象左边界和窗口中目前可见内容的最左端之间的距离
+         scrollTop:设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离
+         scrollWidth:获取对象的滚动宽度
+         offsetHeight:获取对象相对于版面或由父坐标 offsetParent 属性指定的父坐标的高度
+         offsetLeft:获取对象相对于版面或由 offsetParent 属性指定的父坐标的计算左侧位置
+         offsetTop:获取对象相对于版面或由 offsetTop 属性指定的父坐标的计算顶端位置
+         event.clientX 相对文档的水平座标
+         event.clientY 相对文档的垂直座标
+         event.offsetX 相对容器的水平坐标
+         event.offsetY 相对容器的垂直坐标
+     *
+     *
+     */
+
+</script>
