@@ -5,13 +5,26 @@
     <title></title>
     <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="layer.js"></script>
-    <script type="text/javascript">
-        var div = "<div style='height: 500px;width: 800px;background: blue;'></div>";
-        $.layer("ff",div, function () {
-            alert("弹出成功！！！" );
-        });
-    </script>
 </head>
 <body>
+    <script type="text/javascript">
+        var div = "<div style='height: 100px;width: 200px;background: blue;'></div>";
+        $.layer({
+            title:"gerg",
+            content:div,
+            confirms:[
+                {"bnt":"确认","fun":function(){
+                        alert("确认");
+                }},
+                {"bnt":"取消","fun":function(){
+                    alert("取消");
+                }},{"bnt":"取消","fun":function(){
+                    alert("取消");
+                }}],
+            callback:function (obj) {
+//                alert("弹出成功！！！" +obj);
+            }
+        });
+    </script>
 </body>
 </html>
