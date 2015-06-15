@@ -7,9 +7,13 @@
     <script type="text/javascript" src="layer.js"></script>
 </head>
 <body>
+<div style="width: 500px;height: 500px; margin-top: 500px;background: red;" id="dddd" ></div>
+<div class="dd" style="width: 100px;height: 100px; margin-top: 100px;background: red;"></div>
+<div class="dd" style="width: 100px;height: 100px; margin-top: 100px;background: red;"></div>
     <script type="text/javascript">
-        var div = "<div style='height: 100px;width: 200px;background: blue;'></div>";
-        $.layer({
+        var div = "<div style='height: 100px;width:500px;background: blue;'></div>";
+        $("#dddd, .dd").layer({
+            addEvent:"click",
             title:"gerg",
             content:div,
             confirms:[
