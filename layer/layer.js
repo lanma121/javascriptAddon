@@ -1,22 +1,23 @@
 /**
  * Created by Administrator on 2015/6/8 0008.
+ *信息弹框用法说明：
  *
- * 使用时必须先引用jQuery,
- * 信息弹框
  *注意：不同的项目要改变layer.htm 的路径
+ *      使用时必须先引用jQuery
  *
+ * 举例说明：
  * $(".dd").layer({
- *          addEvent:"click",//增加事件
-            title:"gerg",//设置弹框标题
-            content:div, //设置弹框内容
-            confirms:[ //设置确认取消按钮
+ *          addEvent:"click",//增加事件，可以不加
+            title:"gerg",//设置弹框标题，可以不加
+            content:div, //设置弹框内容，必选
+            confirms:[ //设置确认取消按钮，可以不加
                 {"bnt":"确认","fun":function(){//显示第一个按钮，bnt为按钮的名称，fun为点击按钮执行的函数
                         alert("确认");
                 }},
                 {"bnt":"取消","fun":function(){
                     alert("取消");
                 }}],
-            callback:function (obj) {//弹框成功的回调函数
+            callback:function (obj) {//弹框成功的回调函数，可以不加
                 //alert("弹出成功！！！" +obj);
             }
         });
