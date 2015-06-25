@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by Administrator on 2015/6/8 0008.
  *信息弹框用法说明：
  *
@@ -27,28 +27,31 @@
             target (Object): 要扩展的对象
             prop1 (Object): 要与第一个对象合并的对象
             propN (Object): (可选) 更多要与第一个对象合并的对象
+
+
  *
  */
 (function($){
-
-    function layer(obj){
-        $.get('./layer.htm', function(layerDiv) {
+    {
             console.log(obj.content);
             $("div[name='layerTmp']:last").remove();
             $("body").append(layerDiv);
-            if(obj.title)$(".layui-layer-title:last").text(obj.title);
-            if(obj.content)$(".layui-layer-content:last").append(obj.content);
+            if(obj.title)$(".layer-title:last").text(obj.title);
+            if(obj.content)$(".layer-content:last").append(obj.content);
+            var clientWidth = document.documentElement.clientWidth;
+            var width = $(".layer-content div:first").css("width").replace(/px/,"");
+            $("#layer:last").css({"width":width+"px","left":((clientWidth-width)/2)+"px","visibility":"visible"});
             if(obj.confirms){
                 $.each(obj.confirms,function(i,v){
                     var css = i%2==0 ? "bnt1":"bnt2"
-                    $(".layui-layer-btn").append("<a class="+css+">"+ v.bnt+"</a>");
-                    $(".layui-layer-btn a:eq("+i+")").on("click",function(){
+                    $(".layer-btn").append("<a class="+css+">"+ v.bnt+"</a>");
+                    $(".layer-btn a:eq("+i+")").on("click",function(){
                         $("div[name='layerTmp']:last").remove();
                         if($.isFunction(v.fun))v.fun();
                     });
                 });
             }
-            if($.isFunction(obj.callback)){obj.callback($("#layui-layer").attr("id"))};
+            if($.isFunction(obj.callback)){obj.callback($("#layer").attr("id"))};
             $("#closeLayer").on("click",function(){
                 $("div[name='layerTmp']:last").remove();
             });
@@ -56,12 +59,15 @@
     }
 
     $.fn.layer = function(obj) {
-            if(obj.addEvent){
-                $(this).on(obj.addEvent,function(){
-                    layer(obj);
-                });
-            }else{
-                layer(obj)
-            };
-        }
+        if(!obj){alert("请添加属性对象！");return;}
+        if(obj.addEvent){
+            $(this).on(obj.addEvent,function(){
+                layer(obj);
+            });
+        }else{
+            layer(obj)
+        };
+    }
+
+    console.log("--------------------loading alert/layer.js-----------------------");
 }(jQuery|| {}))
