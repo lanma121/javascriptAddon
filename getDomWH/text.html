@@ -1,12 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
     <title>获取浏览器的宽高</title>
     <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
 </head>
-<body style="background: bisque;height: 500px;width: 2000px">
-<div style="background: lightblue;height: 300px;width: 500px"></div>
+<body style="background: bisque;">
+<div style="background: lightblue;height: 200px;width:200px"></div>
+<div style="background: lightblue;height: 200px;width:300px"></div>
 </body>
 </html>
 <script type="text/javascript">
@@ -45,13 +46,17 @@
     //chrome,firfox,ie9,360,opera body可见区域的高宽，与document.documentElement.client不同的是，包含滚动条
 //    document.write("window.inner------>    :"+window.innerWidth+",:"+window.innerHeight+"</br>");
     console.log("window.inner------>    :"+window.innerWidth+",:"+window.innerHeight+"</br>");
-    //chrome,firfox,IE,360,opera body可见区域的宽高（不包含滚动条） FireFox,Opera页面对象宽度（即BODY对象宽度加上Margin宽)
+    //chrome,firfox,IE,360,opera body可见区域的宽高（不包含滚动条 和边框） FireFox,Opera页面对象宽度（即BODY对象宽度加上Margin宽)
 //    document.write("document.documentElement.client------>  可见区域宽度:"+document.documentElement.clientWidth+",可见区域高度:"+document.documentElement.clientHeight+"</br>");
     console.log("document.documentElement.client------>  可见区域宽度:"+document.documentElement.clientWidth+",可见区域高度:"+document.documentElement.clientHeight+"</br>");
    //chrome,360,opera 为body 的宽高(不包含滚动条)
    //firfox,IE body容纳的dom的高宽与document.body.offset，document.body.client等同；
 //    document.write("document.body.scroll------>   网页正文全文宽:"+document.body.scrollWidth+",网页正文全文高:"+document.body.scrollHeight+"</br>");
+    //chrome :网页正文全文高宽，不包含滚动条，IE,firforx ：document中最大的元素的宽高
     console.log("document.body.scroll------>   网页正文全文宽:"+document.body.scrollWidth+",网页正文全文高:"+document.body.scrollHeight+"</br>");
+    //ie，firfox 不包含滚动条的网页正文的宽高
+    console.log("document.documentElement.scroll------>   网页正文全文宽:"+ document.documentElement.scrollWidth+",网页正文全文高:"+document.documentElement.scrollHeight+"</br>");
+
     //chrome 网页被卷去的高度： document.body.scrollTop = document.body.scrollHeight - document.documentElement.clientHeight
 //    document.write("document.body.scroll------>   网页被卷去的高:"+document.body.scrollTop+",网页被卷去的左:"+document.body.scrollLeft+"</br>");
     console.log("document.body.scroll------>   网页被卷去的高:"+document.body.scrollTop+",网页被卷去的左:"+document.body.scrollLeft+"</br>");

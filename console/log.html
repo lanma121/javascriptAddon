@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
+
+</head>
+<body>
+<div id="div">feeffe</div>
+<script type="text/javascript">
+
+    console.log({name:"fefew",agae:242});//支持多个参数
+    console.log("%o",{name:"fefew",agae:242});
+    console.log('%cThis text is styled!',
+            'color: #86CC00; background-color: blue; font-size: 20px; padding: 3px;')//输出的内容将显示为蓝底绿字
+</script>
+
+<script type="text/javascript" src="log.js"></script>
+
+<script>
+
+    for(var i in console){
+        console.log(i+":"+console[i]);
+    }
+    $.log().info("--------------------------------------------------------------");
+    $.log().group("测试一");
+    $.log({name:"fefew",agae:242});
+    $.log().debug("debug",{name:"fefew",agae:242});
+    $.log().error("error",{name:"fefew",agae:242});
+    $.log().warn("warn");
+    $.log().dir({name:"fefew",agae:242})
+    $.log().dirxml(document.getElementById("div"));
+    $.log().assert(true===false,"assert");
+    $.log().table( [
+        { name: "JavaScript", fileExtension: ".js" },
+        { name: "TypeScript", fileExtension: ".ts" },
+        { name: "CoffeeScript", fileExtension: ".coffee" }
+    ]);
+    $.log().time("耗时");
+    for(var i = 0;i<1000;i++){}
+    $.log().timeEnd("耗时");
+    $.log().trace();
+    $.log().groupEnd();
+
+</script>
+</body>
+</html>

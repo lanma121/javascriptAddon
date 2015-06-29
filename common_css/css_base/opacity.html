@@ -6,11 +6,15 @@
     <style>
 
         .transparent_class {
-            filter:alpha(opacity=20);
+			/*-ms-filter:”progid:DXImageTransform.Microsoft.Alpha(opacity=50)”; This works in IE 8 & 9 too*/  
+			/*filter: progid:DXImageTransform.Microsoft.Alpha(opacity=20); IE4-IE9*/  
+			-webkit-opacity: 0.5; 		/* older safari/Chrome browsers */  
+            filter:alpha(opacity=20);	/* IE 4-9 */ 
             -moz-opacity:0.2;
-            -khtml-opacity: 0.2;
-            opacity: 0.2;
-            rgba(0,0,0,0.5);/*IE9+*/
+            -khtml-opacity: 0.2;		/* Safari 1.x (pre WebKit!) 老式khtml内核的Safari浏览器*/  
+            opacity: 0.2;				/* IE9 + etc...modern browsers */  
+            rgba(0,0,0,0.5);			/*IE9+*/
+			
             /*
                  rgba(R,G,B,A);
                 R：红色值。正整数 | 百分数
