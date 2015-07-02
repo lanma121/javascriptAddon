@@ -10,6 +10,6 @@ function getDomHW(){
 		domScrollWH:{ width:document.documentElement.scrollWidth,height:document.documentElement.scrollHeight}, //firfox,IE，网页正文全文的宽高(不包含滚动条，包含margin);opera，chrome,360.7,safari 有滚动条与bodyScrollWH等同，无滚动条body的宽高加margin 注意：必须等到加载完成才能调用此方法
 		screenWH:{ width:window.screen.width,height:window.screen.height}, // 屏幕分辨率，//兼容所有
         browserWH: { width:window.screen.availWidth,height:window.screen.availHeight},//整个浏览器的高宽,//兼容chrome,firfox,ie，360,opera
-        scrollWH: { left:document.body.scrollWidth - document.documentElement.clientWidt,top:document.body.clientHeigh - document.documentElement.clientHeight}//网页被卷去的长度
+        scrollWH: { left:document.body.scrollWidth - document.documentElement.clientWidth,top:document.body.clientHeight - document.documentElement.clientHeight}//网页被卷去的长度
     }
 }
