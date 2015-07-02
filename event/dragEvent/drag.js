@@ -45,16 +45,16 @@
                 //是否限定在某个区域中移动.
                 //fixarea格式: [x轴最小值,x轴最大值,y轴最小值,y轴最大值]
                 if(opts.fixarea){
-                    if(opts.fixarea.left &&　moveX < opts.fixarea[0]){
+                    if(opts.fixarea.left !== undefined &&　moveX < opts.fixarea.left){
                         moveX = opts.fixarea.left;
                     }
-                    if(opts.fixarea.right &&　moveX > opts.fixarea[1]){
+                    if(opts.fixarea.right!== undefined &&　moveX > opts.fixarea.right){
                         moveX=opts.fixarea.right;
                     }
-                    if(opts.fixarea.top &&　moveY<opts.fixarea.top){
+                    if(opts.fixarea.top!== undefined &&　moveY < opts.fixarea.top){
                         moveY=opts.fixarea.top;
                     }
-                    if(opts.fixarea.bottom &&　moveY>opts.fixarea.bottom) {
+                    if(opts.fixarea.bottom!== undefined &&　moveY > opts.fixarea.bottom) {
                         moveY=opts.fixarea.bottom;
                     }
                 }
@@ -97,7 +97,7 @@
 
 $(function(){
 //限定区域，有回调函数。
-    $('#dragDiv').dragDrop({fixarea:[0,$('#dragContainer').width()-50,0,$('#dragContainer').height()-50]});
+    $('#dragDiv').dragDrop({fixarea:{left:0,right:$('#dragContainer').width()-50,top:0,bottom:$('#dragContainer').height()-50}});
 //默认设置
     $('#dragDiv1').dragDrop({dragDirection:"horizontal",callback:function(XX,YY){console.log(XX)}});
 });
