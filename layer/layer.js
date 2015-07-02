@@ -8,10 +8,11 @@
  *
  * 举例说明：
  * $(".dd").layer({
+ *          drag:true,      //是否可托转
  *          mastLayer：true,//设置蒙版
  *          addEvent:"click",//增加事件，可以不加
             title:"gerg",//设置弹框标题，可以不加
-            content:div, //设置弹框内容，必选,尽量用div包装，并且设置width，否则默认为200px
+            content:div, //设置弹框内容，必选,尽量用div包装，并且设置width，否则ie7默认为200px
             confirms:[ //设置确认取消按钮，可以不加
                 {"bnt":"确认","fun":function(){//显示第一个按钮，bnt为按钮的名称，fun为点击按钮执行的函数
                         alert("确认");
@@ -38,7 +39,7 @@
     var clientHeight = document.documentElement.clientHeight //==> 可见区域的高
     var clientWidth = document.documentElement.clientWidth;
     var back = null;
-
+/********************************************************************************************************************************************************************/
     //关闭遮盖层
     function closeMastLayer(){
         var obj = back || $("#mastLayer:last");
@@ -58,6 +59,7 @@
         $("body").append(back);
         return back;
     }
+/********************************************************************************************************************************************************************/
 
     function closeAlert(obj){//关闭layer
         $("div[name='layerTmp']:last").remove();
@@ -69,11 +71,14 @@
     function resetStyle(obj){//设置内容，根据内容重设样式
         if(obj.title)$(".layer-title:last").text(obj.title);
         var cont = obj.content;
-        if(cont.indexOf("<div")!==0){cont = "<div>"+cont+"</div>"}
         if(obj.content)$(".layer-content:last").append(cont);
-        var width = $(".layer-content div:first").css("width") ? $(".layer-content div:first").css("width"): "200px";
-        $("#layer:last").css({"width":width,"min-width":width,"left":((clientWidth-width.replace(/px/,""))/2)+"px","visibility":"visible"});
-
+        var width = $(".layer-content:last div:first").css("width") || $(".layer-content:last table:first").css("width") ||
+                    $(".layer-content:last p:first").css("width") || $(".layer-content:last").css("width");
+        if(navigator.userAgent.match(/MSIE \d+/)+"" === "MSIE 7"){
+            width = width === "1897px" ? "200px" : width;//200px 没有设置宽度
+            $("#layer:last").css("width",width);
+        }
+        $("#layer:last").css({"left":(parseFloat(clientWidth-width.replace(/px/,""))/2)+"px","visibility":"visible"});
     }
 
     function addBnt (obj){//添加按钮
@@ -97,6 +102,7 @@
             $("body").append(layerDiv);
             resetStyle(obj);    //设置内容和样式
             addBnt (obj);       //添加点击按钮
+            if(obj.drag){drag();}//拖拽弹出框
             if($.isFunction(obj.callback)){obj.callback($("#layer").attr("id"))};//回调函数
             $("#closeLayer").on("click",function(){//给关闭按钮添加点击事件
                 closeAlert(obj);
