@@ -8,7 +8,12 @@
  *
  * 举例说明：
  * $(".dd").layer({
- *          drag:true,      //是否可托转
+ *          enter: true,按enter键触按钮事件
+ *          drag: { focuEle:null,            //点击哪个元素开始拖动,可为空。不为空时，需要为被拖动元素的子元素。默认为标题栏，无需手动设置
+                    callback:null,           //拖动时触发的回调。
+                    dragDirection:'all',    //拖动方向：['all','vertical','horizontal']
+                    fixarea:null            //限制在哪个区域拖动,以数组形式提供{left:minX,right:maxX,top:minY,bottom:maxY}
+                 },
  *          mastLayer：true,//设置蒙版
  *          addEvent:"click",//增加事件，可以不加
             title:"gerg",//设置弹框标题，可以不加
@@ -39,7 +44,7 @@
     var clientHeight = document.documentElement.clientHeight //==> 可见区域的高
     var clientWidth = document.documentElement.clientWidth;
     var back = null;
-/********************************************************************************************************************************************************************/
+    /********************************************************************************************************************************************************************/
     //关闭遮盖层
     function closeMastLayer(){
         var obj = back || $("#mastLayer:last");
@@ -59,52 +64,67 @@
         $("body").append(back);
         return back;
     }
-/********************************************************************************************************************************************************************/
+    /********************************************************************************************************************************************************************/
+
+    var alertObj = null;
 
     function closeAlert(obj){//关闭layer
-        $("div[name='layerTmp']:last").remove();
+        $(alertObj).remove();
         if(obj.mastLayer){
             closeMastLayer();
         }
+        alertObj = null;
     }
 
     function resetStyle(obj){//设置内容，根据内容重设样式
-        if(obj.title)$(".layer-title:last").text(obj.title);
+        obj.title ? $(".layer-title",alertObj).text(obj.title) : $(".layer-title",alertObj).text("消息");
         var cont = obj.content;
-        if(obj.content)$(".layer-content:last").append(cont);
-        var width = $(".layer-content:last div:first").css("width") || $(".layer-content:last table:first").css("width") ||
-                    $(".layer-content:last p:first").css("width") || $(".layer-content:last").css("width");
-        if(navigator.userAgent.match(/MSIE \d+/)+"" === "MSIE 7"){
-            width = width === "1897px" ? "200px" : width;//200px 没有设置宽度
-            $("#layer:last").css("width",width);
-        }
-        $("#layer:last").css({"left":(parseFloat(clientWidth-width.replace(/px/,""))/2)+"px","visibility":"visible"});
+        if(obj.content)$(".layer-content",alertObj).append(obj.content);
+        var width = $(".layer-content",alertObj).children().width()+20;
+        $(".layer",alertObj).css({"width":width,"left":(clientWidth-width)/2+"px","visibility":"visible"});
     }
 
     function addBnt (obj){//添加按钮
         if(obj.confirms){
+            var layerBnt = $(".layer-btn",alertObj);
             $.each(obj.confirms,function(i,v){
-                var css = i%2==0 ? "bnt1":"bnt2"
-                $(".layer-btn").append("<a class="+css+">"+ v.bnt+"</a>");
-                $(".layer-btn a:eq("+i+")").on("click",function(){
+                layerBnt.append("<a href='javascript:void(0);'>"+ v.bnt+"</a>");
+                $("a:eq("+i+")",layerBnt).on("click",function(){
                     closeAlert(obj);
                     if($.isFunction(v.fun))v.fun();
                 });
             });
+            $("a:eq(0)",layerBnt).css("background","#0C8CCD");
+            if(obj.enter){
+                var location = 0;
+                $(document).on("keydown",function(event){
+                    var which = event.which;
+                    if(which===13){
+                        $("a:eq("+location+")",layerBnt).trigger("click");
+                        return false;
+                    }else if(which===37 || which === 39){
+                        location = location < obj.confirms.length - 1 ? ++location : 0;
+                        layerBnt.find("a").css("background","#5FBFE7");
+                        $("a:eq("+location+")",layerBnt).css("background","#0C8CCD");
+                        return false;
+                    }
+                });
+            }
         }
     }
 
     function layer(obj){
         $.get('./layer.html', function(layerDiv) {
             if(window.console && window.console.log)console.log(obj.content);
-            closeAlert(obj);
+            if(alertObj)closeAlert(obj);
+            alertObj = document.createElement("div");
             if(obj.mastLayer){ mastLayer(); }//添加遮盖层
-            $("body").append(layerDiv);
+            $("body").append($(alertObj).html(layerDiv));
             resetStyle(obj);    //设置内容和样式
             addBnt (obj);       //添加点击按钮
-            if(obj.drag){drag();}//拖拽弹出框
-            if($.isFunction(obj.callback)){obj.callback($("#layer").attr("id"))};//回调函数
-            $("#closeLayer").on("click",function(){//给关闭按钮添加点击事件
+            if(obj.drag){$('.layer',alertObj).dragDrop($.extend({},{focuEle:$('.layer-title',alertObj)},obj.drag))}//拖拽弹出框$(opts.focuEle,moveEle)
+            if($.isFunction(obj.callback)){obj.callback($(".layer",alertObj ).attr("id"))};//回调函数
+            $(".layer-close",alertObj).on("click",function(){//给关闭按钮添加点击事件
                 closeAlert(obj);
             });
         });
