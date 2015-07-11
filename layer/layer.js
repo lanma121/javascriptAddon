@@ -8,6 +8,7 @@
  *
  * 举例说明：
  * $(".dd").layer({
+ *          close:function//关闭按钮时调用的函数
  *          enter: true,按enter键触按钮事件
  *          drag: { focuEle:null,            //点击哪个元素开始拖动,可为空。不为空时，需要为被拖动元素的子元素。默认为标题栏，无需手动设置
                     callback:null,           //拖动时触发的回调。
@@ -64,7 +65,7 @@
         $("body").append(back);
         return back;
     }
-    /********************************************************************************************************************************************************************/
+    /*********************************************************************************************************************************************************************/
 
     var alertObj = null;
 
@@ -102,7 +103,7 @@
                     if(which===13){
                         $("a:eq("+location+")",layerBnt).trigger("click");
                         return false;
-                    }else if(which===37 || which === 39){
+                    }else if(obj.confirms.length>1&&(which===37 || which === 39)){
                         location = location < obj.confirms.length - 1 ? ++location : 0;
                         layerBnt.find("a").css("background","#5FBFE7");
                         $("a:eq("+location+")",layerBnt).css("background","#0C8CCD");
@@ -114,7 +115,7 @@
     }
 
     function layer(obj){
-        $.get('./layer.html', function(layerDiv) {
+        $.get('/style/js/alert/layer.html', function(layerDiv) {
             if(window.console && window.console.log)console.log(obj.content);
             if(alertObj)closeAlert(obj);
             alertObj = document.createElement("div");
@@ -126,6 +127,7 @@
             if($.isFunction(obj.callback)){obj.callback($(".layer",alertObj ).attr("id"))};//回调函数
             $(".layer-close",alertObj).on("click",function(){//给关闭按钮添加点击事件
                 closeAlert(obj);
+                if(obj.closeCallback){obj.closeCallback();}
             });
         });
     }
