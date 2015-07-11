@@ -18,9 +18,16 @@
     <script type="text/javascript" src="drag.js"></script>
     <script type="text/javascript">
         $(function(){
-//            $("#myDiv").myDrag();
-//            $("#myDiv2").myDrag();
-        })
+            //限定区域，有回调函数。
+            $('#dragDiv').dragDrop({fixarea:{left:0,right:$('#dragContainer').width()-50,top:0,bottom:$('#dragContainer').height()-50}});
+            //默认设置
+            $('#dragDiv1').dragDrop({
+//                focuEle:null,            //点击哪个元素开始拖动,可为空。不为空时，需要为被拖动元素的子元素。
+//                callback:null,           //拖动时触发的回调。
+//                dragDirection:'all'   //拖动方向：['all','vertical','horizontal']
+//                fixarea:{left:0,right:$('#dragContainer').width()-50,top:0,bottom:$('#dragContainer').height()-50}            //限制在哪个区域拖动,以数组形式提供{left:minX,right:maxX,top:minY,bottom:maxY}
+            });
+        });
     </script>
 </head>
 <body>
@@ -29,7 +36,8 @@
 <div id="dragContainer" style="position:relative;left:10px;top:10px;border:1px dashed blue;width:500px;height:500px;">
     <div id="dragDiv" style="background-color:blue;height:50px;width:50px;position: absolute;top:0px;left: 0px;">
     </div>
-    <div id="dragDiv1" style="border:1px solid red;height:50px;width:50px;position: absolute;top:100px;left: 100px;">
+    <div id="dragDiv1" style="border:1px solid red;height:150px;width:150px;position: absolute;top:100px;left: 100px;">vcvdf
+        <a>fdsfs</a>
     </div>
 </div>
 <span id="span1"></span>
