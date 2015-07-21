@@ -1,0 +1,129 @@
+@charset "utf-8";
+/* CSS Document */
+*{-webkit-tap-highlight-color:transparent;outline:0}
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;vertical-align:baseline;}
+img{border:0 none;vertical-align:top}
+i,em{font-style:normal}
+ol,ul{list-style:none}
+input,select,button,h1,h2,h3,h4,h5,h6{font-size:100%;font-family:inherit}
+
+a{text-decoration:none;color:#333}
+body{margin:0 auto;min-width:320px;max-width:640px;height:100%;background:#FFF;font-size:14px;font-family:Helvetica,STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Arial;line-height:1.5;color:#666;-webkit-text-size-adjust:100% !important;-webkit-user-select:none;user-select:none}
+
+.content{ width:640px; height:auto; background:#e8003a; margin:0 auto;}
+.banner{ width:640px; height:351px; background:url(../images/banner.jpg) top center no-repeat; margin:0 auto;}
+.banner h1{ width:470px; height:40px; font:20px "微软雅黑"; color:#FFF; padding:223px 0 0 90px; text-align:center;} 
+.nev{ width:640px; height:31px; background:url(../images/bj.jpg) top center repeat-x;margin:0 auto;font:20px "微软雅黑"; color:#FFF; text-align:center;}
+
+.cp{ width:600px; height:auto; overflow:hidden; margin:0 auto; margin-top:30px;}
+.cp dl{ width:600px; height:240px; background:#FFF; margin-bottom:18px;}
+.cp dl dd{ width:238px; height:240px; float:left;}
+.cp dl dt{ width:350px; height:240px; float:left;padding-left:10px;}
+.cp dl dt h2{ width:345px; height:auto; overflow:hidden; float:left;  padding-top:10px; font:20px "微软雅黑"; color:#999999;}
+.cp dl dt .asd{ width:350px; height:50px; margin-top:85px;}
+.cp dl dt .price{ font:25px "黑体"; color:#F00; margin-left:15px;}
+.cp dl dt .sale{ font:20px "黑体"; padding-left:80px; color:#999999;}
+.cp dl dt b{ width:160px;border-radius:5px; background-color:#e4393c; height:50px; font-size:24px; text-align:center; line-height:50px; display:block; float:left; color:#fff; font-weight:100; margin-top:10px; margin-left:8px;} 
+.backUp{
+    border: 1px solid #999999;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    width: 45px;
+    height:45px;
+    line-height: 45px;
+    cursor:pointer;
+    position: fixed;
+    right: 2px;
+    display: none;
+    rgba(255,255,255,0.5);			/*IE9+*/
+}
+.arrow-top {
+    border:1px solid salmon;
+    position: relative;
+    border-radius: 50%;
+    width: 44px;
+    height:44px;
+    line-height: 44px;
+    rgba(255,255,255,0.5);			/*IE9+*/
+
+
+}
+.arrow-top .action{
+    transition:top 1s;
+    -webkit-transition:top 1s; /* Safari */
+}
+
+.arrow-top:hover .pre1 {
+    top:-4px;
+
+}
+
+.arrow-top:hover .pre2 {
+    top:-2px;
+
+}
+.arrow-top:hover .pre3 {
+    top:12px;
+
+}
+
+.arrow-top .pre0{
+    background: #f30;
+    width: 20px;
+    height: 2px;
+    position: absolute;
+    top: 7px;
+    left: 12px;
+}
+.arrow-top .pre{
+    border-width:12px;
+    border-color: transparent transparent #F30 transparent;
+    /*****设置border-style:dashed;使ie6支持border透明*****/
+    border-style: dashed dashed solid dashed;
+    /*****设置容器宽高为0*****/
+    width: 0;
+    height: 0;
+    /*****去掉ie6下默认高度，设置以下属性*****/
+    line-height: 0;
+    font-size: 0;
+    overflow: hidden;
+}
+.arrow-top .pre1{
+    position: absolute;
+    top: 0px;
+    left: 10px;
+    z-index: 0;
+}
+.arrow-top .pre2{
+    border-bottom-color:#FFF;
+    position: absolute;
+    top: 2px;
+    left: 10px;
+    z-index: 1;
+}
+.arrow-top .pre3{
+    width: 2px;
+    height: 12px;
+    background: #F30;
+    position: absolute;
+    top:14px;
+    left: 21px;
+    z-index: 2;
+}
+
+.arrow-top .pre4{
+    font-family: 微软雅黑;
+    width: 44px;
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+    font-size: 12px;
+    /*     background: yellow;*/
+    position: absolute;
+    bottom:3px;
+    left: 0px;
+    z-index: 2;
+    color:  #F30;
+
+}

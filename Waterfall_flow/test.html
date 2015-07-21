@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
+    <meta http-equiv="x-dns-prefetch-control" content="on"/>
+    <title>现场体验专区-新疆伊犁专场</title>
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/template.js"></script>
+    <script type="text/javascript" src="js/yili.js"></script>
+</head>
+
+<body>
+<div class="content">
+    <div class="banner"><h1>新疆伊犁地区专场</h1></div>
+    <div class="nev">新会员专享 1积分=1元钱 本专区所有产品 仅限当地现场兑换</div>
+    <div class="cp"></div>
+    <!--<div class="backUp" title="回到顶部">
+        <h1 class="heng"></h1>
+        <div class="arrow">
+            <hr class="leftLine"/>
+            <hr class="rightLine"/>
+            <hr class="downLine" />
+        </div>
+        <div style="padding: 5px 0;text-align: center;font-size: 10px;">顶部</div>
+    </div>-->
+    <div class="backUp" title="回到顶部">
+        <div class="arrow-top">
+            <div class="pre0"></div>
+            <div class="pre pre1 action"></div>
+            <div class="pre pre2 action"></div>
+            <div class="pre3 action"></div>
+            <div class="pre4">顶部</div>
+        </div>
+    </div>
+    <script id="templete" type="text/html">
+        {{each list as value i}}
+            <dl>
+                <dd><img src={{value.img}} /></dd>
+                <dt>
+                <h2>{{value.title}}</h2><br/>
+                <p class="asd">
+                    <span class="price"><font style="font-size:40px">{{value.price}}</font>积分 </span>
+                    <del class="sale">￥{{value.sale}}元</del>
+                </p>
+                <a href="#"><b>现场兑换</b></a>
+                </dt>
+            </dl>
+        {{/each}}
+    </script>
+</div>
+</body>
+</html>
