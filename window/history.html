@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>history</title>
+</head>
+<body>
+
+    <script type="text/javascript">
+        /**
+         * history对象，用来保存浏览历史。
+         *  比如，该窗口先后访问了三个地址，那么history对象就包括三项，length属性等于3。
+         *
+         *  属性：length
+         *  方法：
+                 back()：移动到上一个访问页面，等同于浏览器的后退键。
+                 forward()：移动到下一个访问页面，等同于浏览器的前进键。
+                 go()：接受一个整数作为参数，移动到该整数指定的页面，比如go(1)相当于forward()，go(-1)相当于back()。
+                 如果移动的位置超出了访问历史的边界，以上三个方法并不报错，而是默默的失败。history.go(0);相当于刷新当前页面
+
+            history.pushState()，history.replaceState()
+                HTML5为history对象添加了两个新方法，history.pushState() 和 history.replaceState()，
+                用来在浏览历史中添加和修改记录。所有主流浏览器都支持该方法（包括IE10）
+         *  history.pushState(state，title，url)
+         *      state：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。
+                title：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。
+                url：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。
+            注意，pushState方法不会触发页面刷新。
+                 history.state属性保存当前页面的state对象。
+
+         popstate事件
+             每当同一个文档的浏览历史（即history对象）出现变化时，就会触发popstate事件。
+             需要注意的是，仅仅调用pushState方法或replaceState方法 ，并不会触发该事件，
+             只有用户点击浏览器倒退按钮和前进按钮，或者使用JavaScript调用back、forward、go方法时才会触发。
+             另外，该事件只针对同一个文档，如果浏览历史的切换，导致加载不同的文档，该事件也不会触发。
+             使用的时候，可以为popstate事件指定回调函数。这个回调函数的参数是一个event事件对象，
+             它的state属性指向pushState和replaceState方法为当前url所提供的状态对象（即这两个方法的第一个参数）。
+
+         需要注意的是，当页面第一次加载的时候，在onload事件发生后，Chrome和Safari浏览器（Webkit核心）会触发popstate事件，而Firefox和IE浏览器不会
+
+
+         参考链接：http://javascript.ruanyifeng.com/bom/history.html
+                  http://www.ruanyifeng.com/blog/2013/07/how_to_make_search_engines_find_ajax_content.html
+                  http://www.qttc.net/201303292.html
+         *
+         */
+
+
+        if (!!(window.history && history.pushState)){
+            // 支持History API
+        } else {
+            // 不支持
+        }
+
+        window.onpopstate = function(event) {
+            console.log("location: " + document.location);
+            console.log("state: " + JSON.stringify(event.state));
+        };
+
+        // 或者
+
+        window.addEventListener('popstate', function(event) {
+            console.log("location: " + document.location);
+            console.log("state: " + JSON.stringify(event.state));
+        });
+
+//        上面代码中的event.state，就是通过pushState和replaceState方法，为当前url绑定的state对象。
+//        这个state对象也可以直接通过history对象读取。
+    </script>
+
+
+
+
+
+
+
+</body>
+</html>
