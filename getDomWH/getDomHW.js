@@ -11,7 +11,9 @@ function getDomHW(){
 		screenWH:{ width:window.screen.width,height:window.screen.height}, // 屏幕分辨率，//兼容所有
         browserWH: { width:window.screen.availWidth,height:window.screen.availHeight},//整个浏览器的高宽,//兼容chrome,firfox,ie，360,opera
         scrollWH: { left:document.body.scrollWidth - document.documentElement.clientWidth,top:document.body.clientHeight - document.documentElement.clientHeight},//网页被卷去的长度
-        JQsrollWH :{left: $(document).scrollLeft(),top: $(document).scrollTop()},//返回或设置匹配元素的滚动条的位置(网页被卷去的高度)
-        JQoffsetWH :{left: $("p").offset().left,top: $("p").offset().top}//返回或设置匹配元素相对于文档的偏移（位置）
+        JQsrollWH :{left: $(document).scrollLeft(),top: $(document).scrollTop()},//返回或设置匹配元素的滚动条的位置(网页被卷去的高度),chrome,safari,oprea 给body，document，window都一样，ie和firfox 给body加没效果，document和window一样
+        JQoffsetWH :{left: $("p").offset().left,top: $("p").offset().top},//返回或设置匹配元素相对于文档的偏移（位置）
+        visableWH :{width:$(window).width(),height:$(window).height()},//可见区域宽高（不包含滚动条）
+        scrollWH:{width:$(document).width(),height:$(document).height()}//网页正文宽高(不包含滚动条，包含margin)
     }
 }

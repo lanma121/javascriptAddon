@@ -6,7 +6,7 @@
     <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
 </head>
 <body style="background: bisque;">
-<div style="background: lightblue;height: 200px;width:200px"></div>
+<div style="background: lightblue;height: 1200px;width:1200px"></div>
 <div style="background: lightblue;height: 200px;width:300px"></div>
 </body>
 </html>
@@ -64,6 +64,8 @@
     console.log("jQuery返回第一个匹配元素相对于文档的位置:"+$('body').offset().left+","+$("body").offset().top);
     //chrome 页被卷去的高宽 ，等同于document.body.scrollTop
     console.log("jQuery返回或设置匹配元素的滚动条的位置。:"+$('body').scrollLeft()+","+$('body').scrollTop());
+    console.log("jQuery返回或设置匹配元素的滚动条的位置。:"+$(document).scrollLeft()+","+$(document).scrollTop());
+    console.log("jQuery返回或设置匹配元素的滚动条的位置。:"+$(window).scrollLeft()+","+$(window).scrollTop());
     //ie浏览器标题栏的高宽,
     // 360 body 到document的高宽
 //    document.write("window.screen------>   网页正文部分上:"+window.screenTop+",网页正文部分左："+window.screenLeft+"</br>");
@@ -94,5 +96,14 @@
      *
      *
      */
+    //chrome 可视区域的高宽，不包含滚动条
+console.log( $(window).height()+","+ $(window).width());
+    //chrome 网页正文全文高宽,不包含滚动条
+console.log( $(document).height()+","+ $(document).width());
 
+    $(window).on("scroll",function(){
+        console.log("jQuery返回或设置匹配元素的滚动条的位置。:"+$('body').scrollLeft()+","+$('body').scrollTop());
+        console.log("jQuery返回或设置匹配元素的滚动条的位置。:"+$(document).scrollLeft()+","+$(document).scrollTop());
+        console.log("jQuery返回或设置匹配元素的滚动条的位置。:"+$(window).scrollLeft()+","+$(window).scrollTop());
+    })
 </script>

@@ -38,7 +38,7 @@
 
  参考链接：http://javascript.ruanyifeng.com/tool/console.html#toc0
  */
-(function(){
+(function($){
 
     function eachMsg(msg){
         for(var i ;i<msg.length;i++){
@@ -182,4 +182,4 @@
     if(!$){var $ = {};window.$ = logs;return;}
     $.extend(logs);
 
-}())
+}(jQuery))
