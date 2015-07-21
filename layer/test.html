@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <title></title>
     <script type="text/javascript" src="../jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../event/dragEvent/drag.js"></script>
     <script type="text/javascript" src="layer.js"></script>
 </head>
 <body>
+<div class="layer-close">fffffffffffffffff</div>
 <div style="width: 500px;height: 500px; background: red;" id="dddd" ></div>
 <div class="dd" style="width: 100px;height: 100px; margin-top: 100px;background: red;"></div>
 <div class="dd" style="width: 100px;height: 100px; margin-top: 100px;background: red;"></div>
     <script type="text/javascript">
-        var div = "<div style='height: 100px;width:500px;background: blue;'></div>";
+        var div = "<div style='background: blue;width: 300px'>反反复复反反复复反反复复反反复复反反复复反反复复反反复复反反复复反反复复</div>";
         $("#dddd, .dd").layer({
-            mastLayer:true,
+            enter:true,
+            drag:{ dragDirection:'vertical'},
+//            mastLayer:true,
             addEvent:"click",
             title:"gerg",
             content:div,
@@ -22,8 +26,6 @@
                         alert("确认");
                 }},
                 {"bnt":"取消","fun":function(){
-                    alert("取消");
-                }},{"bnt":"取消","fun":function(){
                     alert("取消");
                 }}],
             callback:function (obj) {
