@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    /**
+     *
+     *每一个构造函数都有一个属性叫做原型（prototype）
+     * 作用：
+     *     为每一个特定类申明通用的变量或者函数
+     */
+    function Test(){}
+    console.log(Test.prototype); // 输出 "Object"
+    Test.prototype.s = "ssssss";
+    console.log("--------------------------------------------------");
+    /***
+     *当一个对象被创建时，这个构造函数会把它的prototype属性赋值给新对象的内部属性_proto_,这个_proto_被这个对象用来查找他的属性
+     *
+     */
+    function Fish(name, color){
+        this.name=name;
+        this.color=color;
+    }
+    Fish.prototype.livesIn="water";
+    Fish.prototype.price=20;
+    var fish = new Fish("mackarel", "gray");
+    console.log(fish.name+","+fish.color+","+fish.livesIn+","+fish.price);
+    console.log("--------------------------------------------------");
+    /*
+     * 关于prototype,理解这个很有必要
+     * 可以在类型上使用proptotype来为类型添加行为。这些行为只能在类型的实例上体现。
+     * JS中允许的类型有Array, Boolean, Date, Enumerator, Error, Function, Number, Object, RegExp, String
+     * 以后这样分，没有实例化的类称为类型，实例化的类称为对象实例简称实例
+     */
+
+    Object.prototype.name = "zhangsan";
+    Object.prototype.nihao = function(){
+        console.log("i can method name is "+this.name);
+    }
+
+    var obj = new Object();
+    obj.nihao();
+    console.log(obj.name);
+    console.log("prototype使用的限制--------------------------------------------------");
+    //在实例上不能使用prototype，否则会发生编译错误
+//    obj.prototype.sex = "男";//error,无法给一个实例prototype
+    var o = {
+        name:"zhangsan"
+    }
+//    o.prototype.age = 30;//error,无法给一个实例prototype
+    console.log("如何定义类型上的静态成员--------------------------------------------------");
+    //可以为类型定义“静态”的属性和方法，直接在类型上调用即可
+    console.log(Object.name);
+    Object.nihao();
+    //实例不能调用类型的静态属性或方法，否则发生对象未定义的错误。
+    Object.class = "三年二班";//类静态属性
+    var ob = new Object();
+    console.log(ob.class); //error 实例不能调用类型的静态属性和方法
+    console.log("可以在外部使用prototype为自定义的类型添加属性和方法");
+    //可以在外部使用prototype为自定义的类型添加属性和方法。
+    function Mytest(){
+        this.name = "zhangsan";
+        this.age = 20;
+    }
+
+    Mytest.prototype.hello = function(){
+        console.log(this.name);
+    }
+    var m = new Mytest();
+    m.hello();
+    console.log("在外部不能通过prototype改变自定义类型的属性或方法");
+    //在外部不能通过prototype改变自定义类型的属性或方法。
+    //该例子可以看到：调用的属性和方法仍是最初定义的结果。
+    Mytest.prototype.name = "lisi";
+    var mm = new Mytest();
+    console.log(mm.name);
+    console.log("可以在对象实例上改变或增加属性。");
+    //可以在对象实例上改变或增加属性。（这个是肯定的）
+    //也可以在对象上改变或增加方法。（和普遍的面向对象的概念不同）
+    mm.age = 10;
+    mm.name2 = "lisi";
+    mm.hello = function(){
+        console.log(this.name2);
+        console.log(this.age);
+    }
+    mm.hello();
+
+    console.log("个类型如何从另一个类型继承--------------------");
+    //继承，这个例子说明了一个类型如何从另一个类型继承。
+    function Mytest2(){}
+    Mytest2.prototype = new Mytest;
+    var m2 = new Mytest2();
+    console.log(m2.name);
+    console.log("子类如何重写父类的属性或方法--------------------");
+    //这个例子说明了子类如何重写父类的属性或方法。
+    Mytest2.prototype.name = "wangwu";
+    Mytest2.prototype.hello = function(){
+        console.log(this.name)
+        console.log('i can mytest2 extend Mytest save method hello');
+    }
+    var m3 = new Mytest2();
+    m3.hello();
+    console.log("----------------------------------");
+    //子类中的name属性值不会被父类覆盖
+    function Mytest3(){
+        this.name = "子类中的name属性值不会被父类覆盖";
+        this.age = 20;
+    }
+    Mytest3.prototype = new Mytest();
+    var m4 = new Mytest3();
+    console.log(m4.name);
+
+</script>
+</body>
+</html>

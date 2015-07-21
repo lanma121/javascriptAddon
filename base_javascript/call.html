@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+
+
+   /*
+    call方法: 调用一个对象的一个方法，以另一个对象替换当前对象。
+    格式:
+       对象.方法.call([thisObj[,arg1[, arg2[,   [,.argN]]]]])
+    参数:
+        thisObj:可选项。将被用作当前对象的对象。
+        arg1, arg2,  , argN : 参数.
+    */
+   function Class(){
+        this.name = 'Class';
+        this.b = "fewwffw";
+        this.getName = function(){
+            console.log(this);//function ClassA(){this.b = 'Classss'; this.nam = 'ClassAff';}
+        }
+    }
+
+    function ClassA(){
+        this.b = 'Classss';
+        this.nam = 'ClassAff';
+    }
+
+    var obj = new Class();
+    obj.getName();
+    console.log("----------------------------------");
+    obj.getName.call(new ClassA());
+
+   /******
+    *
+    * obj1.method1.call(obj2,argument1,argument2)//call的作用就是把obj1的方法放到obj2上使用，后面的argument1..这些做为参数传入．
+    * @constructor
+    */
+    function A(){
+        console.log("aaaaaa");
+        console.log("------------------this: "+this);
+        this();//
+    }
+
+    function B(){
+        console.log("bbbbbbbbb");
+        console.log("------------------this"+this);
+    }
+
+   A.call(B);//替换A中的this对象为B
+   /**
+    *
+    * Class1.call(this) 的 意思就是使用 Class1 对象代替this对象，那么 Class2 中不就有Class1 的所有属性和方法了吗，
+    * c2 对象就能够直接调用Class1 的方法以及属性了，执行结果就是：alert（“cc”）;
+    * @constructor
+    */
+   function Class1() {
+       this.showTxt = function(txt) {
+           alert(txt);
+       }
+   }
+   function Class2(){
+       Class1.call(this);//将Class2的对象给Class1,即Class1中的this对象为就是Class2中的this，也是c2（将Class1中的所有this的方法和属性绑定到了Class2的对象上）,这样就可以实现继承，Class2的对象调用Class1的方法
+   }
+   var c2 = new Class2();
+   c2.showTxt("cc");
+
+
+
+</script>
+</body>
+</html>

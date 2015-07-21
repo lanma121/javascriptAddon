@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>apply-bind-prototype-call</title>
+</head>
+<body>
+<script type="text/javascript">
+    /**
+     *
+     * bind()方法,是javascript原生的函数类的一个原型方法(即Function.prototype里的方法),不支持ie低版本.
+     *  基本格式:function.bind(obj1,obj2,obj3...);
+           obj1是执行此方法的this上下文
+            obj2及之后的参数,是执行function时传入的参数
+     *  bind方法有两个用处:
+             1.用来改变function方法中的上下文
+             2.给function方法传入参数
+     *  bind方法和apply方法,call方法的区别:
+             1.最大的区别是,bind方法是返回一个改变了上下文和参数的新方法,而不是执行了function
+             2.bind方法传入的参数(obj2及之后的参数),调用的时候会使用这两个参数,但是调用的时候还可以再接着传入新的参数,与bind时候的参数一起被传入并执行
+     */
+//    用法1: 无参数,仅仅改变方法的上下文:
+    var Class = function(name,job){
+        this.name = name;
+        this.job = job;
+    };
+
+    var jyh = new Class('jyh','web-front-end');
+    var zxg = new Class('zxg','php');
+    function bind1(){
+        //给jyh实例添加私有方法:
+        jyh.intro = function(){console.log(this.name)};
+        //给jyh实例添加一个相同私有方法,但是使this上下文指向zxg实例:
+        //注意,使用bind方法,是不执行方法的,只是改变方法里的上下文,返回一个新的方法;
+        jyh.introOther = jyh.intro.bind(zxg);
+        jyh.intro(); //指针指向自己
+        jyh.introOther(); //指针指向zxg
+    }
+
+//用法2: 改变方法的上下文,并且带有参数:
+    function bind2(){
+        var Class = function(name){
+            this.name = name;
+        };
+        var jyh = new Class('jyh');
+        var zxg = new Class('zxg');
+        //给jyh实例添加私有方法:
+        jyh.intro = function(job){console.log(this.name+','+job)};
+        //给jyh实例添加一个相同私有方法,但是使this上下文指向zxg实例:
+        //注意,使用bind方法,是不执行方法的,只是改变方法里的上下文,并且传入执行该方法时的参数
+        //注意,参数是在bind的同时定义的,而不是执行的时候定义的,详细参考bing-3.html
+        jyh.introOther = jyh.intro.bind(zxg,'fdphp');
+        jyh.intro('web-front-endss');    //指针指向自己,传入参数
+        jyh.introOther();
+    }
+//    用法3: 改变方法的上下文,并且传入的参数中带有this:
+    function bind3(){
+        //给jyh实例添加私有方法:
+        jyh.intro = function(job){console.log(job)};
+        //给jyh实例添加一个相同私有方法,但是使this上下文指向zxg实例:
+        //注意,bind方法,第二个参数开始,this指向决定于bind的时候,而非调用的时候,
+        //如果在这里使用bind,无论在何处执行jyh.introOther,得到的结果都是 zxg,[object Window]
+        jyh.introOther = jyh.intro.bind(zxg,this);
+        jyh.intro('web-front-end');    //指针指向自己,传入参数
+
+        var Klass = function(name){
+            this.name=name;
+            this.init();
+        };
+        Klass.prototype.init=function(){
+            console.log(this);
+            //如果在这里使用bind,this指向就是Klass的实例;
+            //打开注释,this指向klass,关闭注释,根据第22行定义的,this指向window
+            //jyh.introOther = jyh.intro.bind(zxg,this);
+            //和在哪里调用没有关系
+            jyh.introOther();
+        };
+//将Klass实例化时,调用jyh.introOther(),this指向就是klass;
+        var klass = new Klass('klass');
+    }
+    bind1();
+    console.log("---------------------------------");
+    bind2();
+    console.log("---------------------------------");
+    bind3();
+    console.log("---------------------------------");
+    var Class = function(job,love){
+        this.name = name;
+    };
+    var jyh = new Class('jyh');
+    //给jyh实例添加私有方法:
+    jyh.intro = function(job,love){console.log(job+','+love)};
+    //尤其适合用在setInterval方法,需要传入空对象{}在第一个参数的位置
+    var t = /*setInterval(*/jyh.intro.bind({},'web-front-end','rabbit')/*,3000)*/
+</script>
+</body>
+</html>
