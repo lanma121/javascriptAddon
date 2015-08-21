@@ -60,13 +60,15 @@ console.log("loading identifyBrowser.js ----------------");
     var browser={
         versions:function(){
             var u = navigator.userAgent, app = navigator.appVersion;
-
             return {
-                ie:u.indexOf("MSIE") > -1 ? u.match(/MSIE \d+/) :"",
+                ie:u.indexOf("MSIE") > -1 ? u.match(/MSIE \d+/) :"",//ie11不包含MSIE
                 trident: u.indexOf('Trident') > -1, //IE内核--->ie8及以上版本
-                presto: u.indexOf('Presto') > -1, //opera内核
+                presto: u.indexOf('Presto') > -1,  //opera内核
+                Firefox:u.indexOf('Firefox') > -1, //火狐浏览器
+                Chrome:u.indexOf('Chrome') > -1,   //Chrome浏览器
+                Opera:u.indexOf('OPR') > -1,       //Opera浏览器
                 webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,//火狐内核
+                gecko:  u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,//火狐内核
                 mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
                 ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
                 android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
