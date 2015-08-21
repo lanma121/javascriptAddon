@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CSS3 radius实现圆形动画特效</title>
+    <style>
+        /* 定义放整个元素的盒子*/
+        .warper {
+            margin: 0px auto;
+            height: 200px;
+            width: 200px;
+           /* position: relative;*/
+            border: 1px solid orangered;
+        }
+        /***
+            @keyframes规则是创建动画。 @keyframes规则内指定一个CSS样式和动画将逐步从目前的样式更改为新的样式。
+            请用百分比来规定变化发生的时间，或用关键词 "from" 和 "to"，等同于 0% 和 100%。
+            0% 是动画的开始，100% 是动画的完成。
+                Internet Explorer 10、Firefox 以及 Opera 支持 @keyframes 规则和 animation 属性。
+                Chrome 和 Safari 需要前缀 -webkit-。
+        ****/
+        @keyframes rond {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes rond {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        /* 定义外边框用于滚动的盒子 */
+        #rond {
+            margin: 10px auto;
+            height: 100px;
+            width: 100px;
+            border: 1px solid #0CF;
+            border-radius: 50%;
+            position: relative;
+            animation: rond 3s infinite;/**所有动画属性的简写属性，除了 animation-play-state 属性。 1.规定动画的名称   2.规定动画的时长****/
+            -webkit-animation: rond 3s infinite;
+        }
+        /* 定义滚动的盒子 */
+        #test {
+            height: 10px;
+            width: 10px;
+            background-color: #0CF;
+            border-radius: 50%;
+            position: absolute;
+            top: 0px;
+            left: 10px;
+            margin: 5px;
+        }
+    </style>
+
+</head>
+<body class="keBody">
+    <h1 class="keTitle">CSS3 radius实现圆形动画特效</h1>
+        <!--效果html开始-->
+    <div class="warper">
+        <div id="rond">
+            <div id="test"></div>
+        </div>
+        <div id="load">
+            <p></p>
+        </div>
+    </div>
+</body>
+</html>

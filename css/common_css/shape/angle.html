@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>用CSS画三角形</title>
+    <style type="text/css">
+        *{ margin:0px; padding:0px;}
+        /**
+            可以调整border大小改变三角形的形状，直角、钝角、锐角
+            改变border 的透明度，想不同方向显示三角
+            改变div的大小实现不同的四边形
+            缺点：占用的空间大，透明度的区域也是div
+
+        */
+        .triangle{ height:0px; width:0px;
+            border-left:50px solid red;
+            border-top:50px solid transparent;
+            border-bottom:50px solid transparent;}
+    </style>
+</head>
+<body>
+    <div class="triangle"></div>
+</body>
+</html>

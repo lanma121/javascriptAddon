@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+/*
+    。
+    min-width的用法，当宽度由内容决定的时候才起作用
+    容器的高度默认情况下是由内容多少决定的，但宽度不是啊！默认情况下是继承了父容器的宽度。当然，前提是display是block
+    _width:220px;padding:12px;white-space:nowrap"
+
+    参考：http://www.cnblogs.com/pigtail/archive/2012/06/28/2568646.html
+         https://perishablepress.com/maximum-and-minimum-height-and-width-in-internet-explorer/
+         http://www.duitang.com/static/csshack.html
+
+*/
+        .ie-hack {
+            min-width: 100px;
+            max-width: 800px;
+            _width:100px;
+            display: inline-block;
+            display:inline;
+            white-space:nowrap;
+           /* zoom:1;*/
+            /**+min-width: auto;
+            *+width: expression(this.offsetWidth > 100 ? (this.offsetWidth < 200 ? 'auto' : '500px') : '50px');
+            _width: expression(this.offsetWidth > 100 ? (this.offsetWidth < 200 ? 'auto' : '500px') : '50px');
+            overflow: hidden;*/
+        }
+    </style>
+</head>
+<body>
+<input class="ie-hack" type="button" value="LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL" />
+<br>
+<input class="ie-hack" type="button" value="s" />
+<div class="ie-hack" style="background: #ec971f">
+    1143
+
+</div>
+</body>
+</html>
