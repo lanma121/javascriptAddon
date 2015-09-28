@@ -47,136 +47,134 @@
     }
 
     function error(msg){//error方法输出信息时，在最前面加一个红色的叉，表示出错，同时会显示错误发生的堆栈
-        if(window.console.error){
+        if(window.console&&window.console.error){
             console.error(msg);
         }
     }
     function debug(msg){
-        if(window.console.debug){
+        if(window.console&&window.console.debug){
             console.debug(msg);
         }
     }
     function warn(msg){
-        if(window.console.warn){
+        if(window.console&&window.console.warn){
             console.warn(msg);
         }
     }
     function info(msg){
-        if(window.console.info){
+        if(window.console&&window.console.info){
             console.info(msg);
         }
     }
 
     function group(msg){//分组信息
-        if(window.console.group){
+        if(window.console&&window.console.group){
             console.group(msg);
         }
     }
 
     function groupCollapsed(msg){//console.groupCollapsed方法与console.group方法很类似，唯一的区别是该组的内容，在第一次显示时是收起的（collapsed），而不是展开的。
-        if(window.console.group){
+        if(window.console&&window.console.group){
             console.groupCollapsed(msg);
         }
     }
 
     function groupEnd(){//分组结束
-        if(window.console.groupEnd){
+        if(window.console&&window.console.groupEnd){
             console.groupEnd();
         }
     }
 
     function dir(msg){//用来对一个对象进行检查（inspect），并以易于阅读和打印的格式显示,比log方法更易读，信息也更丰富,对于输出DOM对象非常有用，因为会显示DOM对象的所有属性
-        if(window.console.dir){
+        if(window.console&&window.console.dir){
             console.dir(msg);
         }
     }
 
     function dirxml(){//用来显示网页的某个节点（node）所包含的html/xml代码
-        if(window.console.dirxml){
+        if(window.console&&window.console.dirxml){
             console.dirxml(document.getElementById("div"))
         }
     }
 
     function trace(){//用来追踪函数的调用轨迹,当前执行的代码在堆栈中的调用路径；ie10+
-        if(window.console.trace){
+        if(window.console&&window.console.trace){
             console.trace();
         }
     }
 
     function time(msg){//与timeEnd搭配显示代码的运行时间。msg计时器名称 需与timeEnd相同
-        if(window.console.time){
+        if(window.console&&window.console.time){
             console.time(msg);
         }
     }
 
     function timeEnd(msg){//与time搭配显示代码的运行时间。msg需与time相同
-        if(window.console.timeEnd){
+        if(window.console&&window.console.timeEnd){
             console.timeEnd(msg);
         }
     }
 
     function profile(msg){//与time搭配显示代码的运行时间。msg需与time相同
-        if(window.console.profile){
+        if(window.console&&window.console.profile){
             console.profile(msg);
         }
     }
 
     function profileEnd(){//与time搭配显示代码的运行时间。msg需与time相同
-        if(window.console.profileEnd){
+        if(window.console&&window.console.profileEnd){
             console.profileEnd();
         }
     }
 
     function  assert(expression,msg){//类似于单元测试中的断言，接受两个参数，第一个参数是表达式，第二个参数是字符串,当 expression 表达式为 false 的时候，输出后面的信息
-        if(window.console.assert){
+        if(window.console&&window.console.assert){
             console.assert(expression,msg);
         }
     }
 
     function count(msg){//用于统计当前代码被执行过多少次,msg为辅助信息
-        if(window.console.count){
+        if(window.console&&window.console.count){
             console.count(msg);
         }
     }
 
     function table(msg){//用表格的形式显示复合类型的数据，必须拥有主键 ，数组的主键为数字键，对象和json的主键为属性
-        if(window.console.table){
+        if(window.console&&window.console.table){
             console.table(msg);
         }
     }
 
     function clear(){
-        if(window.console.clear){
+        if(window.console&&window.console.clear){
             console.clear();
         }
     }
    var logs =
        {log: function ( msg ){
-            if(window.console){
-                if(window.console.log && msg){
-                    console.log(msg);
-                    return;
-                }
-                return {
-                    error:error,
-                    warn:warn,
-                    debug:debug,
-                    info:info,
-                    assert:assert,
-                    clear:clear,
-                    count:count,
-                    dir:dir,
-                    dirxml:dirxml,
-                    table:table,
-                    trace:trace,
-                    group:group,
-                    groupCollapsed:groupCollapsed,
-                    groupEnd:groupEnd,
-                    time:time,
-                    timeEnd:timeEnd,
-                    profile:profile,
-                    profileEnd:profileEnd
-                }
+            if(window.console&&window.console.log && msg){
+                console.log(msg);
+                return;
+            }
+            return {
+                error:error,
+                warn:warn,
+                debug:debug,
+                info:info,
+                assert:assert,
+                clear:clear,
+                count:count,
+                dir:dir,
+                dirxml:dirxml,
+                table:table,
+                trace:trace,
+                group:group,
+                groupCollapsed:groupCollapsed,
+                groupEnd:groupEnd,
+                time:time,
+                timeEnd:timeEnd,
+                profile:profile,
+                profileEnd:profileEnd
             }
         }};
     if(!$){var $ = {};window.$ = logs;return;}
