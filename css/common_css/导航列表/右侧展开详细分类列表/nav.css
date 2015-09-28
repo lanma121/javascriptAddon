@@ -1,0 +1,27 @@
+/* 公用 www.divcss5.com www.css5.com.cn */
+#n{margin:10px auto; width:920px; border:1px solid #CCC;font-size:14px; line-height:30px;}#n a{ padding:0 4px; color:#333}
+
+ul {list-style-image: none;list-style-type: none;}
+
+
+* {margin: 0px;padding: 0px;list-style-type: none; text-decoration:none}
+body { margin-right: auto;margin-left: auto;font-family: "宋体";font-size: 12px;font-weight: normal;color: #333333; background: url(../images/background.gif) no-repeat;background-position:center top;	background-attachment: fixed;}
+.clear{clear:both;height:0px;width:0px;font-size: 0px;line-height: 0px;}
+.cent{ margin:0 auto; width:100%; overflow:hidden}
+
+/* 公用 end */
+.hide {display:none;}
+.menuNav {position:relative;float:left;width:201px;z-index:9999; height:730px; margin-left:10px; margin-top:10px }
+.menuNav h2{ height:36px; width:100%; position:absolute; left:0; top:0;line-height:36px; text-align:left; color:#FFF; font-size:14px; text-indent:18px; background:url(blue-tit.gif) no-repeat 0 0}
+.navlist{position:absolute; padding-top:3px;left:0;top:36px;width:197px; border:2px solid #3B569B;height:686px;border-top:0;background:#FFF}
+.navlist dl{position:relative;width:197px;height:38px;line-height:38px}
+.navlist dl dt{position:absolute;font-size:14px;z-index:2;left:0; padding-left:2px; text-align:left; font-weight:bold; background:url(left-li-bg.gif) repeat-x 0 0}
+.navlist dl dt a{display:block;width:159px; padding-left:36px; padding-top:2px; font-size:14px; height:36px; background: url(d0.gif) no-repeat 18px 15px; line-height:36px;color:#2F2F2F}
+.navlist dl dt a.on{color:#F00; height:34px; padding-top:0; line-height:34px;background:#FFF url(d1.gif) no-repeat 18px 15px}
+.navlist dl dt.icon03 a.on,.navlist dl dt.icon04 a.on,.navlist dl dt.icon05 a.on,.navlist dl dt.icon06 a.on,.navlist dl dt.icon07 a.on,.navlist dl dt.icon08 a.on,.navlist dl dt.icon09 a.on,.navlist dl dt.icon10 a.on,.navlist dl dt.icon11 a.on,.navlist dl dt.icon12 a.on,.navlist dl dt.icon13 a.on,.navlist dl dt.icon14 a.on,.navlist dl dt.icon15 a.on,.navlist dl dt.icon16 a.on,.navlist dl dt.icon17 a.on,.navlist dl dt.icon18 a.on,.navlist dl dt.icon19 a.on,.navlist dl dt.icon20 a.on{ display:inline-block; border-top:2px solid #3B569B;background:#FFF url(d1.gif) no-repeat 18px 15px;border-left:2px solid #3B569B;border-bottom:2px solid #3B569B}
+.navlist dl dd{display:none;position:absolute; left:197px; text-align:left; width:250px;border:2px solid #3B569B;background:#FFF;z-index:1}
+.navlist dl dd .sideleft{float:left;width:210px; padding:20px; color:#CCC}
+.navlist dl dd .sideleft a{ padding:0 5px}
+
+
+.menv03 {top:-1px;}.menv04 {top:-10px;}.menv05 {top:-10px;}.menv06 {top:-10px;}.menv07 {top:-10px;}.menv08 {top:-10px;}.menv09 {top:-10px;}.menv10 {top:-10px;}.menv11 {top:-10px;}.menv12 {top:-10px;}.menv13 {top:-10px;}.menv14 {top:-10px;}.menv15 {top:-10px;}.menv16 {top:-10px;}.menv17 {top:-10px;}.menv18 {top:-10px;}.menv19 {bottom:-10px;}.menv20{bottom:0;}

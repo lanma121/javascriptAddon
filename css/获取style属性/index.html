@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .ss{background:blue; color:#cdcdcd; width:200px}
+
+    </style>
+</head>
+<body>
+<p id="qq" class="ss" >sdf</p>
+<script type="text/javascript">
+
+    function GetCurrentStyle (obj, prop) {     //IE中使用的是obj.currentStyle方法，而FF是用的是getComputedStyle 方法
+        if (obj.currentStyle) {     //判断IE
+            return obj.currentStyle[prop];
+        }
+        else if (window.getComputedStyle) {     //判断FF
+            propprop = prop.replace (/([A-Z])/g, "-$1");
+            propprop = prop.toLowerCase ();
+            return document.defaultView.getComputedStyle (obj,null)[prop];
+        }
+        return null;
+    }
+    var dd=document.getElementById("qq");
+    alert(JSON.stringify(document.defaultView.getComputedStyle (dd,null)));
+    alert(GetCurrentStyle(dd,"display"));
+</script>
+</body>
+</html>

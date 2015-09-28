@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        /*  > :表示父元素下第一层对应的子元素，及儿子元素不是孙子及以后的元素 */
+    div.son>p {/*选取父元素是 <div> 元素的每个 <p> 元素，并设置其背景色：*/
+        background-color:yellow;
+    }
+       /* +  :element+element	div+p	选择紧接在 <div> 元素之后的所有 <p> 元素。*/
+    div.next+p{
+        background-color:red;
+    }
+      /* |  :[attribute|=value]	[lang|=en]	选择 lang 属性值以 "en" 开头的所有元素。*/
+    [lang|=en] {
+        background:blue;
+    }
+     /* ~   :[attribute~=value]	[title~=flower]	选择 title 属性包含单词 "flower" 的所有元素。*/
+    [title~=flower]{
+        border:5px solid fuchsia;
+    }
+     /*   :first-child	p:first-child	选择属于父元素的第一个子元素的每个 <p> 元素。*/
+        div.first-child *:first-child{/*第一个儿子元素*/
+            border: 5px solid blue;
+        }
+    </style>
+</head>
+<body>
+<!--   >     -->
+<div class="son next first-child">
+    <p>我是唐老鸭。<div><span>sfesfesedf</span></div></p>
+    <p>我住在 Duckburg。</p>
+</div>
+<p>我最好的朋友是米老鼠。</p>
+<div class="son">
+    <span><p>我的样式不会改变。</p></span>
+</div>
+
+<p lang="en">Hello!</p>
+<p lang="en-us">Hi!</p>
+<p lang="en-gb">Ello!</p>
+<p lang="us">Hi!</p>
+<p lang="zh">nihao!</p>
+
+<p title="zh">nihao!</p>
+<p title="zh flower">nihao!</p>
+
+
+</body>
+</html>

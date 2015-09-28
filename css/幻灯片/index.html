@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7"/>
+    <title>带焦点和文字标题幻灯片特效 在线演示 www.divcss5.com</title>
+    <link href="images/default_blue.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="images/jquery.min.js"></script>
+    <script type="text/javascript" src="images/jquery.sgallery.js"></script>
+</head>
+<body>
+
+<p>&nbsp;</p>
+
+<p>幻灯片效果如下：</p>
+
+<div class="slide">
+    <div class="FocusPic">
+        <div class="content" id="main-slide">
+            <div class="changeDiv">
+                <a href="#" title="CSS特效幻灯片效果展示"><img src="1.jpg"/></a>
+                <a href="#" title="带焦点和文字标题幻灯片特效"><img src="2.jpg"/></a>
+                <a href="#" title="要显示标题放这里MAX1"><img src="3.jpg"/></a>
+                <a href="http://www.divcss5.com/" target="_blank" title="DIVCSS学习上DIVCSS5"><img src="4.jpg"/></a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        new slide("#main-slide", "cur", 460, 340, 1);//焦点图宽度高度设置 要改变 还需要修改CSS里对图片设置宽度高度
+    })
+    function $jquery(id) {
+        return document.getElementById(id)
+    }
+    ;
+</script>
+
+<p>&nbsp;</p>
+
+<p>返回此 <a href="http://www.divcss5.com/css-texiao/texiao776.shtml">幻灯片特效</a>：<a
+        href="http://www.divcss5.com/css-texiao/texiao776.shtml">http://www.divcss5.com/css-texiao/texiao776.shtml</a>
+</p>
+</body>
+</html>

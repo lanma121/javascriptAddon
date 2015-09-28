@@ -1,0 +1,22 @@
+body{color:#444;background: #eee url(../images/v9/body-bg.png) repeat-y center}
+a{text-decoration:none; color:#444}
+a:hover{text-decoration:underline; color:#1E50A2}
+
+#n{margin:10px auto; width:920px; border:1px solid #CCC;font-size:12px; line-height:30px;}
+#n a{ padding:0 4px; color:#333}
+body p{ text-align:center}
+
+
+
+
+/* Ĭ�ϻõ�Ƭ */
+.FocusPic{zoom:1;position:relative; margin:0 auto;overflow:hidden;width:460px; height:340px}
+.FocusPic .content{overflow:hidden}
+.changeDiv img{width:460px; height:340px}
+.FocusPic .changeDiv a{position:absolute;top:0px;left:0px;display:none;}
+.FocusPic .title-bg,.FocusPic .title{position:absolute;left:0px;bottom:0; text-align:center;width:460px;height:44px;line-height:44px;overflow:hidden}
+.FocusPic .title-bg{background:#000;filter:alpha(opacity=50);opacity:0.5;}
+.FocusPic .title a{display:block;color:#fff; font-size:18px;}
+.FocusPic .change{bottom:50px;height:10px;right:44%;*right:44%;_right:44%;position:absolute;text-align:left;z-index:10000;}
+.FocusPic .change i{background:url(d.png) no-repeat 0 bottom;cursor:pointer; overflow:hidden;line-height:240px;padding-right:12px; width:10px; height:10px;display:inline-block;display:-moz-inline-stack;zoom:1;*display:inline;}
+.FocusPic .change i.cur {background:url(ds.png) no-repeat 0 0;}
