@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../../jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../../event/dragEvent/drag.js"></script>
+    <script type="text/javascript" src="自定义滚动条.js"></script>
+    <style>
+        /* 滚动条整体部分 */
+        .scrollbar{
+            position: fixed;
+            width: 100%;
+            height: 20px;
+        }
+        .scrollbar>div{
+            height: 20px;
+            box-sizing:border-box;/*定义适应某个区域的具体内容*/
+            -moz-box-sizing:border-box; /* Firefox */
+        }
+        /*定义滚动条轨道(外层轨道) 内阴影+圆角*/
+        .scrollbar-track{
+           /* position:absolute;
+            top: 0px;
+            left: 20px;*/
+            float: left;
+            box-shadow: inset 0 0 6px rgba(85, 85, 85,0.3);/** 水平位置阴影/垂直位置阴影/模糊距离/阴影颜色/内/外阴影/阴影尺寸                        **/
+            background: #F0F0F0;
+        }
+        .scrollbar-button{
+            width: 20px;
+            background: #E4E4E4;
+            float: left;
+            box-shadow: inset 0 0 6px rgba(85, 85, 85,0.3);
+        }
+        .scrollbar-button:hover{
+            background: -webkit-radial-gradient(#A4D5EF, #D6EEFB); /* Safari 5.1 - 6.0 */
+            background: -o-radial-gradient(#A4D5EF,#D6EEFB); /* Opera 11.6 - 12.0 */
+            background: -moz-radial-gradient(#A4D5EF,#D6EEFB); /* Firefox 3.6 - 15 */
+            background: radial-gradient(#A4D5EF,#D6EEFB); /* 标准的语法 */
+        }
+        .arrow{
+            width: 0;
+            margin: 5px 2.5px;
+            border: 5px solid;
+        }
+        .arrow1{
+             border-color: transparent black transparent transparent ;
+         }
+        .arrow2{
+            margin-left: 7.5px;
+            border-color: transparent transparent transparent black;
+        }
+        /*定义滑块 内阴影+圆角*/
+        .scrollbar-thumb{
+            width: 600px;
+            height: 100%;
+         }
+        .scrollbar-thumb:hover{
+            border: 1px solid #3C7FB1;
+            background: -webkit-linear-gradient(#A4D5EF, #D6EEFB); /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(#A4D5EF, #D6EEFB); /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(#A4D5EF, #D6EEFB); /* Firefox 3.6 - 15 */
+            background: linear-gradient(#A4D5EF,#D6EEFB); /* 标准的语法 */
+        }
+        /*.scrollbar-button1{
+            position: absolute;
+            top:0px;
+            left: 0px;
+        }
+
+        .scrollbar-button2{
+            position: absolute;
+            top:0px;
+            right: 0px;
+        }*/
+
+    </style>
+</head>
+<body id="body">
+<div id="box" style="width: 800px;height: 600px;border: 3px solid cadetblue;margin:20px auto;overflow: auto;">
+    <div id="content" style="width: 1200px;height: 500px;margin:30px 10px 0 10px;border: 1px sienna solid;">
+
+    </div>
+</div>
+<!-- <div id="dragContainer" style="width: 100%;height: 12px;border: 1px solid #808080;border-radius:5px; position: fixed;bottom:5px;left:5px;right:5px;z-index: 1000;">
+      <div id="dragDiv1" style="width:50%;height:8px;background: #808080;border-radius:5px; position: absolute;top:2px;left: 1px;"></div>
+  </div>-->
+<!--<div id="scrollbar" class="scrollbar">
+    <div class="scrollbar-button scrollbar-button1"><div class="arrow arrow1"></div></div>
+    <div class="scrollbar-track">
+        <button class="scrollbar-thumb">|||</button>
+    </div>
+    <div class="scrollbar-button scrollbar-button2"><div class="arrow arrow2"></div></div>
+</div>-->
+</body>
+</html>
+
+<script type="text/javascript">
+    var options = {
+        box:"#box",
+        content:"#content",
+        type:"horizontal"  //默认vertical，垂直滚动条还是水平滚动条，vertical垂直滚动条，horizontal水平滚动条
+    }
+    $("#box").scroll(options);
+
+
+</script>

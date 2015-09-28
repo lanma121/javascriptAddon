@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        /*
+            滚动条是一个伪元素(参考：css/css_base/伪类_伪选择器.html)，可以自定义样式。这个伪类可以将webkit自身的滚动条渲染关闭，只按照用户自定义的css信息进行渲染
+
+        */
+
+        /***
+                webkit内核
+                :horizontal – horizontal伪类应用于水平方向的滚动条
+                :vertical – vertical伪类应用于竖直方向的滚动条
+                :decrement – decrement伪类应用于按钮和内层轨道（track piece）。它用来指示按钮或者内层轨道是否会减小视窗的位置（比如，垂直滚动条的上面，水平滚动条的左边。）
+                :increment – increment伪类和decrement类似，用来指示按钮或内层轨道是否会增大视窗的位置（比如，垂直滚动条的下面和水平滚动条的右边。）
+                :start – start伪类也应用于按钮和滑块。它用来定义对象是否放到滑块的前面。
+                :end – 类似于start伪类，标识对象是否放到滑块的后面。
+                :double-button – 该伪类以用于按钮和内层轨道。用于判断一个按钮是不是放在滚动条同一端的一对按钮中的一个。对于内层轨道来说，它表示内层轨道是否紧靠一对按钮。
+                :single-button – 类似于double-button伪类。对按钮来说，它用于判断一个按钮是否自己独立的在滚动条的一段。对内层轨道来说，它表示内层轨道是否紧靠一个single-button。
+                :no-button – 用于内层轨道，表示内层轨道是否要滚动到滚动条的终端，比如，滚动条两端没有按钮的时候。
+                :corner-present – 用于所有滚动条轨道，指示滚动条圆角是否显示。
+                :window-inactive – 用于所有的滚动条轨道，指示应用滚动条的某个页面容器（元素）是否当前被激活。（在webkit最近的版本中，该伪类也可以用于：：selection伪元素。webkit团队有计划扩展它并推动成为一个标准的伪类）
+                另外，:enabled、:disabled、:hover 和 :active 等伪类同样可以用于滚动条中。
+
+                关于具体的demo，这里不再做了，网上已经有很多demo可以参考，比如，webkit官方的这个，具体的线上项目中也有现成的例子，比如，QQ空间的签到弹出框和豆瓣说的右侧详情栏（某条信息评论多的时候会显示）。
+
+                值得一提的是，webkit的这个伪类和伪元素的实现很强大，虽然类目有些多，但是我们可以把滚动条当成一个页面元素来定义，也差不多可以用上一些高级的CSS3属性，比如渐变、圆角、RGBa等等，当然有些地方也可以用图片，然后图片也可以转换成Base64，总之，可以尽情发挥了。
+
+            ***/
+        /* 滚动条整体部分 */
+        #scroll::-webkit-scrollbar{
+            width: 30px;    /*width表示纵向滚动条的宽度，也可以指定为%百分比，在在这种情况下就代表了，滚动条占整个视窗的百分比*/
+            height: 30px;   /*height属性表示横向滚动条的高*/
+            background-color: red;
+        }
+        /*定义滚动条轨道(外层轨道) 内阴影+圆角*/
+        #scroll::-webkit-scrollbar-track
+        {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            background-color: blue;
+        }
+        /* 内层轨道，滚动条中间部分 */
+        #scroll::-webkit-scrollbar-track-piece {
+            background: #df8505;
+        }
+        /*定义滑块 内阴影+圆角*/
+        #scroll::-webkit-scrollbar-thumb
+        {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: #555;
+        }
+        /* 滚动条两端的按钮 */
+        #scroll::-webkit-scrollbar-button {
+            background: salmon;
+        }
+        /* 边角 */
+        #scroll::-webkit-scrollbar-corner {
+            background: #149bdf;
+        }
+        /* 右下角拖动块 */
+        #scroll::-webkit-resizer{
+            background: deeppink;
+        }
+        div{
+            width: 500px;
+            height: 300px;
+            border: 1px solid seagreen;
+            overflow: auto;
+            /**
+                ie设置滚动条
+             */
+            scrollbar-arrow-color: darkorange; /*三角箭头的颜色*/
+            scrollbar-face-color: red; /*立体滚动条的颜色（包括箭头部分的背景色）*/
+            scrollbar-3dlight-color: blue; /*立体滚动条亮边的颜色*/
+            scrollbar-highlight-color: yellow; /*滚动条的高亮颜色（左阴影？）*/
+            scrollbar-shadow-color: green; /*立体滚动条阴影的颜色*/
+            scrollbar-darkshadow-color: #555555; /*立体滚动条外阴影的颜色*/
+            scrollbar-track-color: darkkhaki; /*立体滚动条背景颜色*/
+            scrollbar-base-color:darkkhaki; /*滚动条的基色*/
+        }
+        ul{
+            width: 800px;
+            height: 600px;
+            border: 1px solid salmon;
+            list-style: none;
+        }
+
+        ul li{
+            width: 60px;
+            height: 30px;
+            float: left;
+            border: 1px solid darkmagenta;
+        }
+    </style>
+</head>
+<body>
+<div id="scroll">
+    <ul>
+        <li>sfdfd</li>
+        <li>dfdfd</li>
+        <li>dfdfd</li>
+        <li>dfdfd</li>
+        <li>dfdfd</li>
+        <li>dfdfd</li>
+        <li>dfdfd</li>
+        <li>dfdfd</li>
+        <li>dfdfd</li>
+
+    </ul>
+</div>
+</body>
+</html>
