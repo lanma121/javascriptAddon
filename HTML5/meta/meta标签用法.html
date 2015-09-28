@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <!--
+        <meta> 元素可提供有关页面的元信息（meta-information），比如针对搜索引擎和更新频度的描述和关键词。
+        <meta> 标签位于文档的头部，不包含任何内容。<meta> 标签的属性定义了与文档相关联的名称/值对。
+
+        属性	             值	                             描述
+        content	     some_text	        定义与 http-equiv 或 name 属性相关的元信息，属性始终要和 name 属性或 http-equiv 属性一起使用。
+        http-equiv
+        相当于http的文件头作用，它可以向浏览器传回一些有用的信息，以帮助正确和精确地显示网页内容，与之对应的属性值为content，content中的内容其实就是各个参数的变量值。
+        当服务器向浏览器发送文档时，会先发送许多名称/值对。
+        所有服务器都至少要发送一个：content-type:text/html。这将告诉浏览器准备接受一个 HTML 文档。
+        语法格式是：<meta http-equiv="参数" content="参数变量值">
+            content-type(显示字符集的设定) 设定页面使用的字符集。
+            expires(期限)                 可以用于设定网页的到期时间。一旦网页过期，必须到服务器上重新传输。必须使用GMT的时间格式。
+            refresh(刷新)                 自动刷新并指向新页面。
+            set-cookie(cookie设定)        如果网页过期，那么存盘的cookie将被删除。
+            Pragma(cache模式)             禁止浏览器从本地计算机的缓存中访问页面内容。
+            Window-target(显示窗口的设定) 强制页面在当前窗口以独立页面显示。用来防止别人在框架里调用自己的页面。
+　　        content-Language（显示语言的设定）
+        name
+            author                  标注网页的作者
+            description             用来告诉搜索引擎你的网站主要内容
+            keywords                告诉搜索引擎你网页的关键字是什么              否
+            generator               代表说明网站的采用的什么软件制作。
+            revised                 代表网站重访,7 days代表7天，依此类
+            others
+            robots(机器人向导)       robots用来告诉搜索机器人哪些页面需要索引，哪些页面不需要索引。
+　                                   content的参数有all,none,index,noindex,follow,nofollow。默认是all。
+
+        scheme	       some_text	        定义用于翻译 content 属性值的格式。               否
+    -->
+    <!-- 告诉搜索引擎你网页的关键字是什么-->
+    <meta name ="keywords" content="science, education,culture,politics,ecnomics，relationships, entertaiment, human">
+    <!--用来告诉搜索引擎你的网站主要内容-->
+    <meta name="description" content="This page is about the meaning of science, education,culture.">
+    <!--标注网页的作者-->
+    <meta name="author" content="root,root@21cn.com">
+    <!--
+    robots(机器人向导)
+    　　robots用来告诉搜索机器人哪些页面需要索引，哪些页面不需要索引。
+    　　content的参数有all,none,index,noindex,follow,nofollow。默认是all。
+    　-->
+    <meta name="robots" content="none">
+    <!--设置期限-->
+    <meta http-equiv="expires" content="Fri, 12 Jan 2001 18:18:18 GMT">
+    <!-- cache模式，不缓存，这样设定，访问者将无法脱机浏览。-->
+    <meta http-equiv="Pragma" content="no-cache">
+    <!--自动刷新并指向新页面 (注意后面的引号，分别在秒数的后面和网址的前面) 其中的2是指停留2秒钟后自动刷新到URL网址-->
+    <meta http-equiv="Refresh" content="2;URL=http://www.root.net">
+    <!--(cookie设定) 如果网页过期，那么存盘的cookie将被删除。必须使用GMT的时间格式。-->
+    <meta http-equiv="Set-Cookie" content="cookievalue=xxx; expires=Friday, 12-Jan-2001 18:18:18 GMT; path=/">
+    <!--显示窗口的设定：-->
+    <meta http-equiv="Window-target" content="_top">
+    <!-- 设定页面使用的字符集-->
+    <meta http-equiv="content-Type" content="text/html; charset=gb2312">
+    <meta charset="UTF-8">
+    <!--显示语言的设定-->
+    <meta http-equiv="Content-Language" content="zh-cn" />
+    <!--
+        实现网页转换时的动画效果
+            Duration为切换时间，数字越大切换的时间越长；
+　　        Transition为切换类型：1-23各代表不同的效果，大于23以上的数字输入只会显示随即效果！
+    -->
+    <meta http-equiv="Page-Enter" content="revealTrans(duration=5.0, transition=20)">
+    <meta http-equiv="Page-Exit" content="revealTrans(duration=5.0, transition=20)">
+
+   <!-- Base (基链接)
+    　　说明：插入网页基链接属性
+    　　注意：你网页上的所有相对路径在链接时都将在前面加上“http://www.cn8cn.com/”。其中target="_blank"是链接文件在新的窗口中打开，你可以做其他设置。将“_blank”改为“_parent”是链接文件将在当前窗口的父级窗口中打开；改为“_self”链接文件在当前窗口（帧）中打开；改为“_top”链接文件全屏显示。
+    -->
+    <Base href="http://www.xia8.net/" target="_blank">
+   <!-- Link (链接)
+    　　说明：链接到文件
+    　　注意：很多网站如果你把她保存在收件夹中后，会发现它连带着一个小图标，如果再次点击进入之后还会发现地址栏中也有个小图标。现在只要在你的页头加上这段话，就能轻松实现这一功能。<LINK> 用来将目前文件与其它 URL 作连结，但不会有连结按钮，用於 <HEAD> 标记间， 格式如下：
+  -->  　　
+    <Link href="soim.ico" rel="Shortcut Icon">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
