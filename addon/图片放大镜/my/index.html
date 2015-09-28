@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../../../jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="pictureMagnifier2.js"></script>
+</head>
+<body>
+<div style="height: 1000px;"></div>
+<div style="margin:0 45%" id="img">
+    <a id="largeImage" href="../jqzoom_ev-2.3/demos/imgProd/triumph_big1.jpg" rel="nofollow" target="_blank" >
+        <img id="J_ImgBooth" alt="小米" src="../jqzoom_ev-2.3/demos/imgProd/triumph_small1.jpg" style="border: 20px solid red;">
+    </a>
+</div>
+<div id="background" style="height: 247px;width: 308px;border: 5px solid fuchsia;background-image: url('../jqzoom_ev-2.3/demos/imgProd/triumph_small1.jpg');">
+
+</div>
+ <div style="height:500px;"></div>
+
+<script type="text/javascript">
+    $("#J_ImgBooth,#background").magnifier({bigImgCon:"../jqzoom_ev-2.3/demos/imgProd/triumph_big1.jpg",zoomWidth:400,zoomHeight:400});
+//    $("#background").magnifier({bigPicture:"../jqzoom_ev-2.3/demos/imgProd/triumph_big1.jpg",zoomWidth:200,zoomHeight:200});
+</script>
+</body>
+</html>
