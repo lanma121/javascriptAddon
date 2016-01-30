@@ -5,6 +5,81 @@
     <title></title>
 </head>
 <body>
+<fieldset>
+    <legend>apply、call方法</legend>
+    <blockquote>
+       <h3> JavaScript为函数对象定义了两个方法：apply和call，它们的作用都是将函数绑定到另外一个对象上去运行，两者仅在定义参数的方式有所区别：</h3>
+        以下是引用片段：
+        Function.prototype.apply(thisArg,argArray);</br>
+        Function.prototype.call(thisArg[,arg1[,arg2…]]);</br>
+        从函数原型可以看到，第一个参数都被取名为thisArg，即所有函数内部的this指针都会被赋值为thisArg，这就实现了将函数作为另外一个对象 的方法运行的目的。两个方法除了thisArg参数，都是为Function对象传递的参数。</br>
+        下面的代码说明了apply和call方法的工作方式：</br>
+        //定义一个函数func1，具有属性p和方法A</br>
+        <script type="text/javascript">
+            function applyCall(){
+                function func1(){
+                    this.p="func1-";
+                    this.A=function(arg){
+                        alert(this.p+arg);
+                    }
+                }
+                //定义一个函数func2，具有属性p和方法B
+                function func2(){
+                    this.p="func2-";
+                    this.B=function(arg){
+                        alert(this.p+arg);
+                    }
+                }
+                var obj1=new func1();
+                var obj2=new func2();
+                obj1.A("byA");    //显示func1-byA
+                obj2.B("byB");    //显示func2-byB
+                obj1.A.apply(obj2,["byA"]); //显示func2-byA，其中[“byA”]是仅有一个元素的数组，下同
+                obj2.B.apply(obj1,["byB"]); //显示func1-byB
+                obj1.A.call(obj2,"byA");  //显示func2-byA
+                obj2.B.call(obj1,"byB");  //显示func1-byB
+            }
+        </script>
+        function func1(){</br>
+            this.p="func1-";</br>
+            this.A=function(arg){</br>
+                alert(this.p+arg);</br>
+            }</br>
+        }</br>
+        //定义一个函数func2，具有属性p和方法B</br>
+        function func2(){</br>
+            this.p="func2-";</br>
+            this.B=function(arg){</br>
+              alert(this.p+arg);</br>
+            }</br>
+        }</br>
+        var obj1=new func1();</br>
+        var obj2=new func2();</br>
+        obj1.A("byA");    //显示func1-byA</br>
+        obj2.B("byB");    //显示func2-byB</br>
+        obj1.A.apply(obj2,["byA"]); //显示func2-byA，其中[“byA”]是仅有一个元素的数组，下同</br>
+        obj2.B.apply(obj1,["byB"]); //显示func1-byB</br>
+        obj1.A.call(obj2,"byA");  //显示func2-byA</br>
+        obj2.B.call(obj1,"byB");  //显示func1-byB</br>
+        <button onclick="applyCall()">点击执行</button></br>
+        可以看出，obj1的方法A被绑定到obj2运行后，整个函数A的运行环境就转移到了obj2，即this指针指向了obj2。同样obj2的函数B也可以绑定到obj1对象去运行。代码的最后4行显示了apply和call函数参数形式的区别。</br>
+
+
+        与arguments的length属性不同，函数对象还有一个属性length，它表示函数定义时所指定参数的个数，而非调用时实际传递的参数个数。例如下面的代码将显示2：</br>
+
+        以下是引用片段：</br>
+        function sum(a,b){</br>
+        return a+b;</br>
+        }</br>
+        alert(sum.length);</br>
+
+
+
+    </blockquote>
+</fieldset>
+
+
+
 <script type="text/javascript">
 
 

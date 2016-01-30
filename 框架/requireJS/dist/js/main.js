@@ -1,0 +1,1 @@
+define("name",[],function(){return"Ni ning"}),define("age",[],function(){return 22}),define("info",["name","age"],function(e,t){return{age:t,name:e}}),require.config({shim:{"../../../../jquery-1.11.3.min":{exports:"$"}}}),require(["info"],function(e){alert(222),alert(e.name+"  "+e.age)}),require(["infrastructure"],function(e){alert(e.name)}),define("main",function(){});

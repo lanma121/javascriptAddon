@@ -1,0 +1,16 @@
+ body {
+     background: yellow;
+ }
+ div{
+     border: 2px solid #df8505;
+ }
+ .div1{
+    background: url("images/list-1.png?__sprite");
+     width: 400px;
+     height: 400px;
+ }
+ .div2{
+     background: url("images/list-2.png?__sprite");
+     width: 800px;
+     height: 500px;
+ }

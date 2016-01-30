@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <fieldset>
+        <legend>this指针</legend>
+        this指针是面向对象程序设计中的一项重要概念，它表示当前运行的对象。在实现对象的方法时，可以使用this指针来获得该对象自身的引用。</br>
+
+        和其他面向对象的语言不同，JavaScript中的this指针是一个动态的变量，一个方法内的this指针并不是始终指向定义该方法的对象的，<a href="call.html">在上一节讲函数的apply和call方法时已经有过这样的例子。</a></br>
+        为了方便理解，再来看下面的例子：
+        <script language="JavaScript" type="text/javascript">
+            <!--
+            //创建两个空对象
+            var obj1=new Object();
+            var obj2=new Object();
+            //给两个对象都添加属性p，并分别等于1和2
+            obj1.p=1;
+            obj2.p=2;
+            //给obj1添加方法，用于显示p的值
+            obj1.getP=function(){
+                alert(this.p); //表面上this指针指向的是obj1
+            }
+            //调用obj1的getP方法
+            function gg(){obj1.getP()};
+            //使obj2的getP方法等于obj1的getP方法
+            obj2.getP=obj1.getP;
+            //调用obj2的getP方法
+           function gg2(){obj2.getP();}
+            //-->
+        </script>
+        //创建两个空对象</br>
+        var obj1=new Object();</br>
+        var obj2=new Object();</br>
+        //给两个对象都添加属性p，并分别等于1和2</br>
+        obj1.p=1;</br>
+        obj2.p=2;</br>
+        //给obj1添加方法，用于显示p的值</br>
+        obj1.getP=function(){</br>
+        alert(this.p); //表面上this指针指向的是obj1</br>
+        }</br>
+        //调用obj1的getP方法</br>
+        obj1.getP();<button onclick="gg()">调用obj1的getP方法</button></br>
+        //使obj2的getP方法等于obj1的getP方法</br>
+        obj2.getP=obj1.getP;</br>
+        //调用obj2的getP方法</br>
+        obj2.getP();<button onclick="gg2()">调用obj2的getP方法</button></br>
+        从代码的执行结果看，分别弹出对话框显示1和2。由此可见，getP函数仅定义了一次，在不同的场合运行，显示了不同的运行结果，这是有this指针的变 化所决定的。</br>
+        在obj1的getP方法中，this就指向了obj1对象，而在obj2的getP方法中，this就指向了obj2对象，并通过 this指针引用到了两个对象都具有的属性p。</br>
+
+        由此可见，JavaScript中的this指针是一个动态变化的变量，它表明了当前运行该函数的对象。由this指针的性质，也可以更好的理解 JavaScript中对象的本质：一个对象就是由一个或多个属性（方法）组成的集合。每个集合元素不是仅能属于一个集合，而是可以动态的属于多个集合。 这样，一个方法（集合元素）由谁调用，this指针就指向谁。实际上，前面介绍的apply方法和call方法都是通过强制改变this指针的值来实现 的，使this指针指向参数所指定的对象，从而达到将一个对象的方法作为另一个对象的方法运行。
+
+        每个对象集合的元素（即属性或方法）也是一个独立的部分，全局函数和作为一个对象方法定义的函数之间没有任何区别，因为可以把全局函数和变量看作为 window对象的方法和属性。也可以使用new操作符来操作一个对象的方法来返回一个对象，这样一个对象的方法也就可以定义为类的形式，其中的this 指针则会指向新创建的对象。在后面可以看到，这时对象名可以起到一个命名空间的作用，这是使用JavaScript进行面向对象程序设计的一个技巧。例 如：</br>
+        var namespace1=new Object();</br>
+        namespace1.class1=function(){</br>
+        //初始化对象的代码</br>
+        }</br>
+        var obj1=new namespace1.class1();</br>
+        这里就可以把namespace1看成一个命名空间。</br>
+        由于对象属性（方法）的动态变化特性，一个对象的两个属性（方法）之间的互相引用，必须要通过this指针，而其他语言中，this关键字是可以省略的。如上面的例子中：</br>
+        obj1.getP=function(){</br>
+        alert(this.p); //表面上this指针指向的是obj1</br>
+        参考：<a href="http://blog.jobbole.com/81018/">this、new、apply和call详解</a>
+    </fieldset>
+</body>
+</html>

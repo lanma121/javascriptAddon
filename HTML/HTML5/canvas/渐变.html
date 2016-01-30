@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<canvas id="canvas" width="300" height="300" style="border: 5px solid darkblue;"></canvas>
+<canvas id="canvas1" width="300" height="300" style="border: 5px solid darkblue;"></canvas>
+<script type="text/javascript">
+    var canvas = document.getElementById("canvas");
+    var gtc = canvas.getContext("2d");
+    var clg = gtc.createLinearGradient(30,30,300,300);//创建一个线性渐变。起始坐标为 x1,y1，结束坐标为 x2,y2
+    clg.addColorStop(0,"red");//向一个渐变添加一个颜色停止。颜色停止（color stop） 是渐变中颜色更改发生的位置。offset 必须介于 0 到 1 之间。
+    clg.addColorStop(1,"blue");
+    gtc.fillStyle = clg;
+    gtc.fillRect(0,0,300,300);
+
+    var canvas1 = document.getElementById("canvas1");
+    var clg1 = canvas1.getContext("2d");
+    var crg = clg1.createRadialGradient(150,150,0,200,200,150);//创建一个放射状渐变。圆圈的起始坐标是 x1,y1，半径为 r1。圆圈的结束坐标为 x2,y2，半径为 r2。
+    crg.addColorStop("0","magenta");
+    crg.addColorStop(".25","blue");
+    crg.addColorStop(".50","green");
+    crg.addColorStop(".75","yellow");
+    crg.addColorStop("1.0","red");
+    clg1.fillStyle = crg;
+    clg1.fillRect(0,0,300,300);
+</script>
+</body>
+</html>

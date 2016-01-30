@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<fieldset>
+    <legend>配置文件</legend>
+    <blockquote>
+        默认配置文件为 fis-conf.js，FIS3 编译的整个流程都是通过配置来控制的。FIS3 定义了一种类似 CSS 的配置方式。固化了构建流程，以期让工程构建变得简单。
+
+        <h3>fis.match(selector, props, important);</h3>
+
+        selector glob(<a href="http://fis.baidu.com/fis3/docs/api/config-glob.html">何为glob</a>) 或者是任意正则, FIS3 把匹配文件路径的路径做为selector，匹配到的文件会分配给它设置的 props</br>
+        props 编译规则属性，包括文件属性和插件属性。</br>
+        important 若为true后面的规则就无法覆盖了。</br>
+        通过 API fis.match() FIS3 在处理的时候首先会加载项目内的所有文件，然后通过 fis.match() 来为某一个文件分配不同的属性</br>
+        例子</br>
+        fis.match('a.js', {</br>
+            <blockquote>optimizer: fis.plugin('uglify-js')</blockquote>
+        });</br>
+
+        fis.match('b.min.js', {
+        <blockquote>optimizer: null</blockquote>
+        })</br>
+        如上面，a.js 文件分配了属性，其中处理过程中会调用 fis-optimizer-uglify-js 插件进行压缩；而已经压缩过的 b.min.js 就不需要进行压缩了，那么它的 optimizer 就设置为 null；</br>
+        <h3>::package</h3>
+        fis.match('::package', {
+        packager: fis.plugin('map')
+        });
+        表示当 packager 阶段所有的文件都分配某些属性</br>
+        <h3>::image</h3>
+        <blockquote>
+            解释：追加图片类二进制文件后缀列表。</br>
+            值类型：Array | string</br>
+            默认值：无</br>
+            说明：fis系统在编译时会对文本文件和图片类二进制文件做不同的处理，文件分类依据是后缀名。虽然内部已列出一些常见的图片类二进制文件后缀，但难保用户有其他的后缀文件，内部已列入文本文件后缀的列表为： [ 'svg', 'tif', 'tiff', 'wbmp', 'png', 'bmp', 'fax', 'gif', 'ico', 'jfif', 'jpe', 'jpeg', 'jpg', 'woff', 'cur' ]，用户配置会 追加，而非覆盖内部后缀列表。
+            </br>用法：编辑项目的fis-conf.js配置文件</br>
+
+            fis.set('project.fileType.image', 'swf, cur, ico');</br>
+            fis.match('::image', {
+            useHash: true
+            });
+            // 所有被标注为图片的文件添加 hash
+        </blockquote>
+        <h3>::text</h3>
+        <blockquote>
+            解释：追加文本文件后缀列表。</br>
+            值类型：Array | string</br>
+            默认值：无</br>
+            说明：fis系统在编译时会对文本文件和图片类二进制文件做不同的处理，文件分类依据是后缀名。虽然内部已列出一些常见的文本文件后缀，但难保用户有其他的后缀文件，内部已列入文本文件后缀的列表为： [ 'css', 'tpl', 'js', 'php', 'txt', 'json', 'xml', 'htm', 'text', 'xhtml', 'html', 'md', 'conf', 'po', 'config', 'tmpl', 'coffee', 'less', 'sass', 'jsp', 'scss', 'manifest', 'bak', 'asp', 'tmp' ]，用户配置会 追加，而非覆盖内部后缀列表。
+            </br>用法：编辑项目的fis-conf.js配置文件</br>
+            fis.set('project.fileType.text', 'tpl, js, css');</br>
+            fis.match('::text', {
+            useHash: false
+            });
+            // 所有被标注为文本的文件去除 hash
+        </blockquote>
+        <h3>:js</h3>
+
+        匹配模板中的内联 js，支持 isHtmlLike (指定对文件进行 html 相关语言能力处理，值类型：bool)的所有模板</br>
+
+        fis.match('index.html:js', {
+        optimizer: fis.plugin('uglify-js')
+        });// 压缩 index.html 内联的 js
+        <h3>:css</h3>
+
+        匹配模板中内联 css，支持 isHtmlLike(指定对文件进行 html 相关语言能力处理，值类型：bool) 的所有模板</br>
+
+
+        fis.match('index.html:css', {
+        optimizer: fis.plugin('clean-css')
+        });// 压缩 index.html 内联的 css
+        <h3>规则覆盖</h3>
+
+        假设有两条规则 A 和 B，它俩同时命中了文件 test.js，如果 A 在 B 前面，B 的属性会覆盖 A 的同名属性。不同名属性追加到 test.js 的 File 对象上
+        <h3>fis.media()</h3>
+
+        fis.media() 接口提供多种状态功能，比如有些属性配置是开发阶段的，有些是上线时需要起作用的。</br>
+
+        fis.media() 可以使配置文件变为多份（多个状态，一个状态一份配置）。</br>
+
+        fis.media('rd').match('*', {</br>
+            deploy: fis.plugin('http-push', {</br>
+                receiver: 'http://remote-rd-host/receiver.php'</br>
+            })</br>
+        });</br>
+
+        fis.media('qa').match('*', {</br>
+            deploy: fis.plugin('http-push', {</br>
+                receiver: 'http://remote-qa-host/receiver.php'</br>
+            })</br>
+        });</br>
+        fis3 release rd push 到 RD 的远端机器上</br>
+        fis3 release qa push 到 QA 的远端机器上</br>
+    </blockquote>
+</fieldset>
+</body>
+</html>

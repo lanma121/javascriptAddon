@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../../../jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="ScalingImages.js" type="text/javascript"></script>
+    <script src="jQuery.autoIMG.js" type="text/javascript"></script>
+    <style>
+        .bg{
+            margin: 5px;
+            padding-left: 150px;
+            width: 150px;
+            height: 121px;
+            border: 1px red solid;
+            background: url('images/2弹出框_03.jpg') no-repeat;
+            background-size: auto 121px;
+            background-clip:padding-box;
+            background-origin:padding-box;
+
+        }
+    </style>
+</head>
+<body>
+
+
+<div style="margin: auto;width: 800px;height: 600px;border:1px solid orangered;">
+    <img src="images/2弹出框_03.jpg" onload="ImgSize(this, 150, 150)" style="margin: 5px;border: 1px solid darkblue;">
+    <img src="images/2弹出框_03.jpg"  style="margin: 5px;border: 1px solid darkblue;width: 150px;height: 121px;">
+    <img src="images/2弹出框_03.jpg" style="margin: 5px;border: 1px solid darkblue;">
+    <div class="bg">gdgrdgregergrtegsg三菱发动机偶尔发神经菲利克斯金佛iefjslkfjsdoiuf0oef了SD卡方面陆地上</div>
+</div>
+<script type="text/javascript">
+    $("#dd").autoIMG();
+
+
+</script>
+</body>
+</html>

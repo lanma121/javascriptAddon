@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="validForm.css" />
+    <link rel="stylesheet" href="../layer/layer.css" />
+    <script type="text/javascript" src="../../jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="validFrom.js"></script>
+    <script type="text/javascript" src="../拖拽/drag.js"></script>
+    <script type="text/javascript" src="../layer/layer_v20151104.js"></script>
+</head>
+<body>
+    <fieldset>
+        <legend>datatype实例</legend>
+        <<!--form>
+            组合：<input type="text" datatype="n,/^\d{1,3}$/|zh1-2"></br>
+
+
+
+        </form>-->
+
+    </fieldset>
+    <form style="margin: 100px auto;border: 1px solid red;">
+        event：<input type="text" value="ss" datatype="n" tip="ss" id="fd" event="mouseout" tiptype="2"></br>
+        sweep：<input type="text" value="ss" datatype="n" sweep="true" tip="ss" id="dfd" name="sfs"></br>
+        null：<input type="text" datatype="n" ignore="null" tiptype=".dfs"><span class="dfs"></span></br>
+        <div>function：<input type="text" datatype="number"><span class="Validform_checktip"></span></div>
+        <!--正则：<input type="text" id="ff" datatype="/^\d{1,3}$/" tiptype="xxxx"></br>-->
+        组合：<input type="text" datatype="n,/^\d{1,3}$/|zh1-2"></br>
+        !：<input type="text" datatype="!zh1-2"></br>
+        密码：<input type="text" datatype="zh1-2" name="kkf" style="height: 30px;"></br>
+        重复密码：<input type="text" datatype="zh1-2" recheck="kkf"></br>
+      <!--  ajaxurl：<input type="text" datatype="zh1-2" ajax="www.kk.com"></br>
+        ajaxobj：<input type="text" datatype="zh1-2" ajax="o"></br>
+        <label class="Validform_label">整dd数</label> <input type="text" ajax="dd" value="ff" datatype="n"  tip="ff" tiptype="2"></br>
+-->
+        textarea:<textarea datatype="*"></textarea></br>
+        <p>
+        <input type="radio" name="kk" value="ss">
+        <input type="radio" name="kk" value="sss" >
+        <input type="radio" name="kk" value="ssss" datatype="*">
+
+        </p>
+        <p>
+        <input type="checkbox" name="checkbox" value="1"/>
+        <input type="checkbox" name="checkbox" datatype="*" value="2"/>
+            <span class="Validform_checktip"></span>
+        </p>
+
+        <select datatype="*" multy="multiple" tiptype=".sle" name="kkl">
+            <option value>请选择</option>
+            <option value="1">冯绍峰</option>
+            <option value="2">张靓颖</option>
+        </select>
+        <select datatype="*" multy="multiple" tiptype=".sle">
+            <option value>请选择</option>
+            <option value="1">冯绍峰</option>
+            <option value="2">张靓颖</option>
+        </select>
+        <span class="sle"></span>
+        </br>
+
+        <input type="button" value="button">
+        <input type="reset" value="重置">
+        <input type="submit" value="提交">
+    </form>
+    <div></div>
+    <input type="text" id="dd" value="dfsf" name="kkds">
+    <input type="text"  class="dd" value="多个事件测试" name="kkds">
+    <input type="text" class="dd" value="多个事件测试">
+<script type="text/javascript">
+    console.log($("form"));
+   var vla =  $("form").Validform({
+        tiptype:"default",
+        "o":{url:"www.mm.com",type:"post"},
+        "dd":function(){alert(232);},//自定义ajax函数验证
+        datatype:{number:function(val){if(val==="0"){return}return "0未通过";}},//自定义函数检查
+        tipmsg:{"xxxx":function(inputobj,msg,statusType,errorType,cssctl){//自定义提示信息
+            alert("自定义提示样式");
+        }}
+    });
+    var settings = {};
+    console.log($.extend(true,{},settings.ajaxurl || {}))
+    // if($(tiptype).selector&&$(tiptype)[0]){
+
+//    setTimeout(function(){
+        $("#dd").blur(function(){
+           alert(2323);
+        });
+//    },0)
+    $("#dd").blur(function(){
+        alert(this.value);
+    });
+    $("#dd").click(function(){
+     console.log($("#df").find("option:selected").val());
+    });
+
+
+</script>
+</body>
+</html>

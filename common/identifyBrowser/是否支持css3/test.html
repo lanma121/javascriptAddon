@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+     * 大概思路：根据浏览器对非法属性值的处理多判断，如果不支持此属性就会将其值忽略。
+       我们创建一个节点，首先判断是否有你想判读的属性，再判断是否有其值。
+
+    * 例子:就是text-overflow这个属性，text-flow：clip是大部分浏览器都支持的，而text-flow：ellipsis则在firefox和10.6版本以下opera上工作不了
+
+    判断代码如下：*/
+
+    var element = document.createElement('div');
+
+    if('text-overflow' in element.style){
+
+        element.style['text-overflow'] = 'ellipsis';
+
+        return element.style['text-overflow'] === 'ellipsis';
+
+    }else{
+
+        return false;
+
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="../../jquery-1.11.3.min.js"></script>
+</head>
+<body>
+<fieldset>
+    <legend>跨域访问</legend>
+    <blockquote>
+        <h3>header('Access-Control-Allow-Origin: *');</h3>
+        <blockquote>
+            在服务端设置对应的header
+            <div>
+                <img src="header.png">
+            </div>
+        </blockquote>
+
+        <h3>jquery jsonp</h3>
+        <blockquote>
+
+            在服务端设置对应的header
+            <div>
+                <img src="jsonp.png">
+            </div>
+        </blockquote>
+    </blockquote>
+</fieldset>
+<script type="text/javascript">
+    function success_jsonpCallback(dd){
+        console.log("=====================");
+        console.log(dd);
+    }
+    $.ajax({
+        url:'http://www.xabaili.cx/test.php',
+        dataType:"jsonp",
+        jsonp:"jsonpcallback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(默认为:callback)
+        jsonpCallback:"success_jsonpCallback",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名
+        success:function(data){
+           console.log(data);
+        }
+    });
+
+</script>
+<div><a href="http://www.poluoluo.com/jzxy/201402/261614.html" target="_blank">jsonp原理</a></div>
+</body>
+</html>

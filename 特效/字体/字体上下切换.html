@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+
+        body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            background: #fff;
+            color: #9da4aa;
+            font-size: 14px;
+            font-family: arial,"Microsoft Yahei","Hiragino Sans GB",sans-serif;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        .at_update {
+            position: relative;
+            background: #ffa13d;
+            color: #fff;
+        }
+        .at_update .num_inner {
+            height: 125px;
+            line-height: 24px;
+            width: 125px;
+            margin: 0 8px;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            text-align: center;
+        }
+        .at_update .num_inner strong {
+            display: block;
+            position: relative;
+            line-height: 42px;
+            height: 42px;
+            margin-top: 32px;
+            font-family: "Source Sans Pro Light",arial,"Microsoft Yahei","Hiragino Sans GB",sans-serif;
+            font-size: 40px;
+            overflow: hidden;
+        }
+        .at_update .num_inner strong ul {
+            position: absolute;
+            left: 0;
+            top:0;
+            width: 100%;
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+
+    </style>
+</head>
+<body>
+<div class="at_update">
+    <div class="num_inner">
+        <strong>
+            <ul id="xxxx">
+                <li>50</li>
+                <li>400</li>
+                <li>700</li>
+                <li>1100</li>
+                <li>1600</li>
+                <li>2200</li>
+                <li>3000</li>
+            </ul>
+        </strong>
+        贡献值
+    </div>
+</div>
+<script type="text/javascript">
+    /**
+     *
+     * 利用css 过度效果
+     * @type {number}
+     */
+    var topv = 0;
+    setInterval(function(){
+        topv = topv <= -252 ? 0 :topv - 42;
+        var syl = topv+"px";
+        document.getElementById("xxxx").style.top = syl;
+
+    },1000);
+</script>
+
+<div style="position: relative;border: 1px crimson solid;width: 100px;height: 30px;text-align: center;font-size: 20px;overflow: hidden;">
+    <ul id="scrollUp" style="position: absolute;top:0;left: 0px;width: 50px;margin: 0 25px;padding: 5px 0;">
+        <li>50</li>
+        <li>400</li>
+        <li>700</li>
+        <li>1100</li>
+        <li>1600</li>
+        <li>2200</li>
+        <li>3000</li>
+    </ul>
+</div>
+
+<div id="demo" style="width:166px;border:solid rosybrown 1px;height:18px;overflow:hidden;">
+    <div id="demo1">
+        啦啦啦啦啦啦啦啦啦啦
+    </div>
+    <div id="demo2"></div>
+</div>
+<script type="text/javascript" src="../../jquery-1.11.3.min.js"></script>
+<script  type="text/javascript">
+    /**
+     * 思想；
+     *     1. 复制一份滚动数据以用于头尾相接
+     *     2. 通过滚动条的变化滚动内容
+     *     3. 当滚动条的滚到复制内容块的位置时，滚动条还原到对应的原内容块，反复如此！
+     *     注意：
+     *     存放数据的盒子必须是固定大小，否则会根据内容自适应盒子
+     *      保证滚动条的差值要大于等于复制块相对于原原的高度；
+     *
+     *
+     * @type {number}
+     */
+
+    var speed=1000;
+    var tab=document.getElementById("demo");
+    var tab1=document.getElementById("demo1");
+    var tab2=document.getElementById("demo2");
+    tab2.innerHTML=tab1.innerHTML;
+    function Marquee() {
+        console.log(tab2.offsetTop-tab1.offsetTop +"     "+ tab.scrollTop);
+        if (tab2.offsetTop - tab1.offsetTop- tab.scrollTop <= 0) {
+            tab.scrollTop -= (tab1.offsetHeight-1);
+        }
+        else
+        {
+            tab.scrollTop+=1;
+        }
+    }
+    var MyMar = setInterval(Marquee, speed);
+    tab.onmouseover = function () {
+        clearInterval(MyMar);
+    }
+    tab.onmouseout = function () {
+        MyMar = setInterval(Marquee, speed)
+    }
+</script>
+
+<script type="text/javascript">
+    /***
+     * 思想：
+     *    1.设置存放滚动内容的高度、定位、overflow:hidden;
+     *    2.设置滚动内容的定位为absolute
+     *    3.用jQuery 的animate函数动态改变top的值使其显示到对应的内容
+     *
+     * @type {number}
+     */
+    var topva = 0;
+    setInterval(function(){
+        topva = topva <= -138 ? 0 :topva - 23;
+        $("#scrollUp").animate({top:topva+"px"},500);
+    },1000);
+</script>
+</body>
+</html>

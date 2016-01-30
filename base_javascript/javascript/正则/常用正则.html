@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        em{
+            color: red;margin-left: 10px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function(){
+            function matchRex(str,rex){
+                console.log(str+'------'+rex);
+                var  reg=/\/.+\//g;
+                var regstr=rex.match(reg)[0].slice(1,-1);
+                var param=rex.replace(reg,"");
+                var rexp=RegExp(regstr,param);
+                var patt = str.match(rexp);
+                console.log(patt);
+                return patt;
+            };
+            var tests = document.getElementsByName("test");
+            for(var i in tests){
+                tests[i].onclick = function(){
+                    var lebel = this.previousSibling.previousSibling.childNodes[0].nodeValue.replace("：","");
+                    var value = this.previousSibling.value;
+                    this.nextSibling.textContent = matchRex(value,lebel);
+                }
+            }
+        }
+
+
+
+    </script>
+</head>
+<body>
+<fieldset>
+    <legend>常用正则</legend>
+    <blockquote>
+        <p>1. 匹配汉字：<label for="hanzi">/[\u4e00-\u9fa5]/g：</label><input type="text" value="" id="hanzi"><button name="test">测试</button><em></em></p>
+        <p>2. 过滤空白字符，除了单词字符外：<label for="blanck">/\s(?![a-zA-Z])/g：</label><input type="text" value="" id="blanck"><button name="test">测试</button><em></em></p>
+
+
+    </blockquote>
+</fieldset>
+</body>
+</html>

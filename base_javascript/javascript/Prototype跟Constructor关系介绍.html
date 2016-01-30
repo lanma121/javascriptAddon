@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <fieldset>
+        <legend>Prototype跟Constructor关系介绍</legend>
+        <blockquote>
+            在 JavaScript 中，每个函数对象都有名为“prototype”的属性(上面提到过Function.prototype函数对象是个例外，没有prototype属性)，用于引用原型对象。此原型对象又有名为“constructor”的属性，它反过来引用函数本身。这是一种循环引用（i.e. Animal.prototype.constructor===Animal）。
+            <h3>通过以下例子跟内存效果图来分析Prototype、constructor间的关系。</h3>
+            console.log('**************constructor****************');</br>
+
+            console.log('anim.constructor===Animal:'+(anim.constructor===Animal))    ;    //true</br>
+            console.log('Animal===Animal.prototype.constructor:'+(Animal===Animal.prototype.constructor))    ;    //true</br>
+            console.log('Animal.constructor===Function.prototype.constructor:'+(Animal.constructor===Function.prototype.constructor));   //true</br>
+            console.log('Function.prototype.constructor===Function:'+(Function.prototype.constructor===Function));    //true</br>
+            console.log('Function.constructor===Function.prototype.constructor:'+(Function.constructor===Function.prototype.constructor));    //true</br>
+
+            console.log('Object.prototype.constructor===Object:'+(Object.prototype.constructor===Object));    //true</br>
+            console.log('Object.constructor====Function:'+(Object.constructor===Function));    //true</br>
+            <h3>prototype、constructor内存关系图(在Function、Object、Prototype关系图上加入constructor元素)</h3>
+            <img src="images/prototype-constructor内存关系图(在Function-Object-Prototype关系图上加入constructor元素).png"></br>
+            上图中，红色箭头表示函数对象的原型的constructor所指向的对象。</br>
+            注意Object.constructor===Function；本身Object就是Function函数构造出来的</br>
+            如何查找一个对象的constructor，就是在该对象的原型链上寻找碰到的第一个constructor属性所指向的对象。</br>
+        </blockquote>
+
+    </fieldset>
+</body>
+</html>

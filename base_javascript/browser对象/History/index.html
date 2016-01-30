@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <script type="text/javascript" src="../../../jquery-1.11.3.min.js"></script>
+</head>
+<body>
+<div style="height: 800px;"></div>
+    <p><a href="1.html"> 第一页</a></p>
+    <p><a href="2.html"> 第二页</a></p>
+    <p><a href="3.html"> 第三页</a></p>
+    <div id="listBox"></div>
+<button onclick="history.forward()">加载历史列表中的下一个 URL</button>
+    <button onclick="history.go(-2)">加载历史列表中的下一个 URL</button>
+<script>
+    var tt = "首页";
+    var eleMenus = $("a").on("click",function(){
+        tt =$(this).text();
+//        window.localStorage.setItem("name",$(window).scrollTop());
+//        history.back();
+//        window.history.replaceState({title:tt}, null, null);
+//        document.title = tt;
+//        return false;
+    });
+
+    if (history.pushState) {
+        window.history.pushState(null, null, null);
+
+//        history.forward();
+        //页面无刷新的，原先ajax请求的数据加载过来了  这就是popstate事件的作用
+        window.addEventListener("popstate", function (e) {
+            alert(3434);
+            var state = e.state;
+            console.log(state)
+        }, false);
+    }
+
+</script>
+</body>
+</html>

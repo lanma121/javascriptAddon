@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../../jquery-1.11.3.min.js"></script>
+</head>
+<body>
+
+<input type="checkbox" name="checkbox" value="1"/>
+<input type="checkbox" name="checkbox" value="2"/>
+<input type="checkbox" name="checkbox" value="3"/>
+<input type="checkbox" name="checkbox" value="4"/>
+<input type="checkbox" name="checkbox" value="5"/>
+<input type="checkbox" name="is_read" value="5" checked='checked'/>
+<input type="button" id="test" onclick="go();" value="jquery获取"/>
+<input type="button"  onclick="chk();" value="jS获取"/>
+<div>
+    <input id="checkAll" type="button" onclick="CheckedAll()" value="全选" />
+    <input type="button" name="btnCheckedNo" value="全不选" onclick="javascript:CheckedNo();" />
+    <input type="button" name="btnCheckedRev" value="反　选" onclick="javascript:CheckedRev();" />
+</div>
+<script type="text/javascript">
+    function chk(){
+        var obj=document.getElementsByName('checkbox');  //选择所有name="'test'"的对象，返回数组
+        //取到对象数组后，我们来循环检测它是不是被选中
+        var s='';
+        for(var i=0; i<obj.length; i++){
+            if(obj[i].checked) s+=obj[i].value+',';  //如果选中，将value添加到变量s中
+        }
+        //那么现在来检测s的值就知道选中的复选框的值了
+        alert(s==''?'你还没有选择任何内容！':s);
+    }
+    function go() {
+        var str="";
+        alert(document.getElementsByName("is_read")[0].checked);
+        var value = $("input[type='checkbox'][name='is_read']:checked").attr('checked');
+        alert(value);
+        $("input[name='checkbox']:checked").each(function(){
+            str += $(this).val()+","
+        })
+        alert(str);
+    }
+    function CheckedAll(){
+        $(':checkbox').attr('checked','checked');
+    }
+    //全不选
+    function CheckedNo(){
+        $(':checkbox').removeAttr('checked');
+    }
+    //反选
+    function CheckedRev(){
+        var arr = $(':checkbox');
+        for(var i=0;i<arr.length;i++){
+            arr[i].checked = ! arr[i].checked;
+        }
+    }
+</script>
+</body>
+</html>

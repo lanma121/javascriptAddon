@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="../../jquery-1.11.3.min.js"></script>
+</head>
+<body>
+    <div>
+        <img src="jfdz.jpg" style="width: 100%;height: 100%;"><!---->
+    </div>
+    <script src="getMousePosition.js"></script>
+    <script>
+        var fCallBack = function(){
+            alert("select");
+        }
+        $("img").fTriggerEveByDomPosition(1424,562,[{l:956,t:150,r:1142,b:195},{l:573,t:95,r:612,b:133}],fCallBack);
+
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+ body {
+     background: yellow;
+ }
+ div{
+     border: 2px solid #df8505;
+ }
+ .div1{width: 400px;
+     height: 400px;background-repeat: no-repeat;}
+ .div2{width: 800px;
+     height: 500px;background-repeat: no-repeat;}.div1{background-position:-400px 0px}.div2{background-position:0px -403px}.div1,.div2{background-image: url(/demo/css/syl_z_0900dbe.png)}

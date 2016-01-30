@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <fieldset>
+        <legend>Function 对象（类）</legend>
+        <blockquote>
+            <h3>1.函数只不过是一种引用类型，它们的行为与用 Function 类明确创建的函数行为是相同的。</h3>
+            例：function sayHi(sName, sMessage) {
+                alert("Hello " + sName + sMessage);
+            }</br>
+            var sayHi = new Function("sName", "sMessage", "alert(\"Hello \" + sName + sMessage);");
+            <p><em>注意：尽管可以使用 Function 构造函数创建函数，但最好不要使用它，因为用它定义函数比用传统方式要慢得多。不过，所有函数都应看作 Function 类的实例。</em></p>
+            <h3>2.函数名只是指向函数对象的引用值，行为就像其他对象一样。甚至可以使两个变量指向同一个函数：</h3>
+            <h3>3.函数属于引用类型，所以它们也有属性和方法。</h3>
+                属性 length 声明了函数期望的参数个数</br>
+                Function 对象也有与所有对象共享的 valueOf() 方法和 toString() 方法。这两个方法返回的都是函数的源代码，在调试时尤其有用</br>
+             既然函数本身也是一个对象，它们的类型是function，联想到C++、Java等面向对象语言的类定义，可以猜测到Function类型的作用所在， 那就是可以给函数对象本身定义一些方法和属性，借助于函数的prototype对象，可以很方便地修改和扩充Function类型的定义，例如下面扩展了 函数类型Function，为其增加了method1方法，作用是弹出对话框显示"function"：
+
+            以下是引用片段：</br>
+            <script type="text/javascript">
+                function mm(){
+                    Function.prototype.method1=function(){
+                        alert("function");
+                    }
+                    function func1(a,b,c){
+                        return a+b+c;
+                    }
+                    func1.method1();
+                    func1.method1.method1();
+                }
+            </script>
+            Function.prototype.method1=function(){
+                alert("function");
+            }</br>
+            function func1(a,b,c){
+                return a+b+c;
+            }</br>
+            func1.method1();</br>
+            func1.method1.method1();//它调用了method1这个函数对象的method1方法。虽然看上去有点容易混 淆，但仔细观察一下语法还是很明确的：这是一个递归的定义。因为method1本身也是一个函数，所以它同样具有函数对象的属性和方法，所有对 Function类型的方法扩充都具有这样的递归性质。</br>
+            <button onclick="mm();">点击执行</button>
+            <h3>4.有名函数(定义式)和无名函数（声明式）</h3>
+            //创建的是有名函数</br>
+            function funcName(){
+            //函数体
+            }</br>
+            //创建了一个无名函数，只是让一个变量指向了这个无名函数</br>
+            var funcName=function(){
+            //函数体
+            }</br>
+
+            区别：对于有名函数，它可以出现在调用之后再定义；而对于无名函数，它必须是在调用之前就已经定义
+            <h3>5.函数对象和其他内部对象的关系</h3>
+            除了函数对象，还有很多内部对象，比如：Object、Array、Date、RegExp、Math、Error。</br>
+            这些名称实际上表示一个类型，可以通 过new操作符返回一个对象。</br>
+            然而函数对象和其他对象不同，当用typeof得到一个函数对象的类型时，它仍然会返回字符串“function”，而 typeof一个数组对象或其他的对象时，它会返回字符串“object”。</br>
+            下面的代码示例了typeof不同类型的情况：
+            <script type="text/javascript">function isType(type,id){document.getElementById(id).innerHTML = (typeof ( type ))}</script>
+            <div><button onclick="isType(Function,'Function')">alert(typeof(Function)));</button> <em id="Function" style="color: red;"></em></div>
+            <div><button onclick="isType(new Function(),'newFunction')">alert(typeof(new Function()));</button> <em id="newFunction" style="color: red;"></em></div>
+            <div><button onclick="isType(Array,'Array')">alert(typeof(Array)));</button> <em id="Array" style="color: red;"></em></div>
+            <div><button onclick="isType(new Array(),'newArray')">alert(typeof(new Array())));</button> <em id="newArray" style="color: red;"></em></div>
+            <div><button onclick="isType(Object,'Object')">alert(typeof(Object)));</button> <em id="Object" style="color: red;"></em></div>
+            <div><button onclick="isType(new Object(),'newObject')">alert(typeof(new Object())));</button> <em id="newObject" style="color: red;"></em></div>
+            <div><button onclick="isType(Date,'Date')">alert(typeof(Date)));</button> <em id="Date" style="color: red;"></em></div>
+            <div><button onclick="isType(new Date(),'newDate')">alert(typeof(new Date())));</button> <em id="newDate" style="color: red;"></em></div>
+            <em>尽管函数本身也是一个对象，但它与 普通的对象还是有区别的，因为它同时也是对象构造器，也就是说，可以new一个函数来返回一个对象，这在前面已经介绍。所有typeof返回 “function”的对象都是函数对象。也称这样的对象为构造器（constructor），因而，所有的构造器都是对象，但不是所有的对象都是构造 器。</em>
+            <h3>构造函数</h3>
+            //以Animal作为构造函数，就可以像下面这样创建一个新对象：</br>
+            function Animal(sort, character) {</br>
+                this.sort = sort;</br>
+                this.character = character;</br>
+            }</br>
+            var dog = new Animal("mammal", "four legs");</br>
+            创建dog的对象的过程如下：</br>
+            首先，new运算符创建一个空对象（{}），</br>
+            然后以这个空对象为调用对象调用函数Animal，为这个空对象添加两个属性sort和character，</br>
+            接着，再将这个空对象的默认constructor属性修改为构造函数的名称（即Animal；空对象创建时默认的 constructor属性值是Object），并且将空对象的__proto__属性设置为指向Animal.prototype——这就是所谓的对象初始化。</br>
+            最后，返回初始化完毕的对象。这里将返回的新对象赋值给了变量dog。</br>
+
+            dog.sort;        // mammal</br>
+            dog.character;   // four legs</br>
+            dog.constructor; // Animal</br>
+
+            聪明的读者结合前面介绍的内容，可能会认为使用new运算符调用构造函数创建对象的过程也可以像下面这样来实现：</br>
+
+            var dog = {};</br>
+            Animal.call(dog, "mammal", "four legs");</br>
+            表面上看，这两行代码与var dog = new Animal("mammal", "four legs");是等价的，其实却不是。虽然通过指定函数的执行环境能够部分达到初始化对象的目的，例如空对象dog确实获得了sort和character这两个属性：</br>
+            dog.sort;        // mammal</br>
+            dog.character;   // four legs</br>
+            dog.constructor; // Object —— 注意，没有修改dog对象默认的constructor属性</br>
+
+            但是，最关键的是新创建的dog对象失去了通过Animal.prototype属性继承其他对象的能力。只要与前面采用new运算符调用构造函数创建对象的过程对比一下，就会发现，new运算符在初始化新对象期间，除了为新对象添加显式声明的属性外，还会对新对象进行了一番“暗箱操作”——即将新对象的constructor属性重写为Animal，将新对象的__proto__属性设置为指向Animal.prototype。虽然手工“初始化对象”也可以将dog.constructor重写为Animal，但根据ECMA262规范，对象的__proto__属性对开发人员是只读的，对它的设置只能在通过new运算符创建对象时由JavaScript解释引擎替我们完成。
+            JavaScript是基于原型继承的，如果不能正确设置对象的__proto__属性，那么就意味着默认的继承机制会失效：</br>
+            Animal.prototype.greet = "Hi, good lucky!";</br>
+            dog.greet; // undefined</br>
+            <h3><a href="call.html">函数的apply、call方法和length属性</a></h3>
+        </blockquote>
+
+    </fieldset>
+</body>
+</html>

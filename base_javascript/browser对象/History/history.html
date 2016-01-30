@@ -5,43 +5,121 @@
     <title>history</title>
 </head>
 <body>
+    <fieldset>
+        <legend>history对象</legend>
+        <blockquote>
+            <h3> history对象，用来保存浏览历史。</h3>
+            *  比如，该窗口先后访问了三个地址，那么history对象就包括三项，length属性等于3。</br>
+            *</br>
+            *  属性：length</br>
+            *  方法：</br>
+            back()：移动到上一个访问页面，等同于浏览器的后退键。</br>
+            forward()：移动到下一个访问页面，等同于浏览器的前进键。</br>
+            go()：接受一个整数作为参数，注意:IE支持向go()方法传URL参数。移动到该整数指定的页面，比如go(1)相当于forward()，go(-1)相当于back()。</br>
+            如果移动的位置超出了访问历史的边界，以上三个方法并不报错，而是默默的失败。history.go(0);相当于刷新当前页面</br>
+
+        </blockquote>
+    </fieldset>
+    <fieldset>
+        <legend>history.pushState和history.replaceState</legend>
+        <blockquote>
+            用来在浏览历史中添加和修改记录。所有主流浏览器都支持该方法（包括IE10）
+            <h3>与传统的AJAX的区别</h3>
+            <p>传统的ajax有如下的问题：</p>
+             1.虽然ajax可以无刷新改变页面内容，但无法改变页面URL
+            </br>
+             2.其次为了更好的可访问性，内容发生改变后，改变URL的hash。但是hash的方式不能很好的处理浏览器的前进、后退等问题
+            </br>
+             3.有的浏览器引入了onhashchange的接口，不支持的浏览器只能定时去判断hash是否改变
+            </br>
+             4.再有，ajax的使用对搜索引擎很不友好，往往蜘蛛爬到的区域是空的
+            <p>history.pushState, history.replaceStat的优点：</p>
+            1.可以通过pushState和replaceState接口操作浏览器历史，并且改变当前页面的URL。
+            </br>
+            2.SEO优化
+            </br>
+            3.更少的数据请求
+            </br>
+            4.更好的用户体验
+            </br>
+            5.pushState是将指定的URL添加到浏览器历史里，replaceState是将指定的URL替换当前的URL。
+            replaceState是将指定的URL替换当前的URL,替换当前历史记录点
+
+            replaceState的api和pushState类似，不同之处在于replaceState不会在window.history里新增历史记录点，而pushState会在历史记录点里新增一个记录点的
+            </br>
+            <h3>如何使用</h3>
+            var state = {otherkey: othervalue};</br>
+            window.history.pushState({state, document.title, url);</br>
+            state：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。
+            <blockquote>
+                state对象除了要title和url之外，也可以添加其他的数据，比如：还想将一些发送ajax的配置给保存起来。</br>
+                State对象可以是任何Json字符串。因为firefox会使用用户的硬盘来存取state对象，这个对象的最大存储空间为640k。如果大于这个数 值，则pushState()方法会抛出一个异常。如果确实需要更多的空间来存储，请使用本地存储。</br>
+            </blockquote>
+            title：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。</br>
+            url：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。</br>
+            <blockquote>
+                这个参数用来传递新的history实体的URL，注意浏览器将不会在调用pushState()方法后加载这个URL。但也许会过一会尝试加载这个URL。比如在用户重启了浏览器后，新的url可以不是绝对路径。如果是相对路径，那么它会相对于现有的url。新的url必须和现有的url同域，否则pushState()将抛出异常。这个参数是选填的，如果为空，则会被置为document当前的url。
+            </blockquote>
+            <p>如何响应浏览器的前进、后退操作</p>
+            window对象上提供了onpopstate事件，上面传递的state对象会成为event的子对象，这样就可以拿到存储的title和URL了。</br>
+            window.addEventListener('popstate', function(e){</br>
+            if (history.state){</br>
+            var state = e.state;</br>
+            //do something(state.url, state.title);</br>
+            }</br>
+            }, false);</br>
+            这样就可以结合ajax和pushState完美的进行无刷新浏览了。</br>
+            <strong>注意:</strong></br>
+            pushState方法不会触发页面刷新。</br>
+            history.state属性保存当前页面的state对象。</br>
+            replaceState和pushState是相似的，不需要多做解释。</br>
+            <strong>popstate事件</strong></br>
+            每当同一个文档的浏览历史（即history对象）出现变化时，就会触发popstate事件。</br>
+            需要注意的是，仅仅调用pushState方法或replaceState方法 ，并不会触发该事件，</br>
+            只有用户点击浏览器倒退按钮和前进按钮，或者使用JavaScript调用back、forward、go方法时才会触发。</br>
+            另外，该事件只针对同一个文档，如果浏览历史的切换，导致加载不同的文档，该事件也不会触发。</br>
+            使用的时候，可以为popstate事件指定回调函数。这个回调函数的参数是一个event事件对象，
+            它的state属性指向pushState和replaceState方法为当前url所提供的状态对象（即这两个方法的第一个参数）。
+            </br>
+            <p> 一些限制</p>
+
+            1、无法跨域，这个是必然的。引用曾经在网上看到的一句经典的话：“如果javascript可以跨域的话，那他就可以逆天了！”
+            </br>
+            2、state对象虽然可以存储很多自定义的属性，但值不能是个对象。
+            </br>
+           3.当页面第一次加载的时候，在onload事件发生后，Chrome和Safari浏览器（Webkit核心）会触发popstate事件，而Firefox和IE浏览器不会
+
+            <p> 对应后端的一些处理</p>
+
+            这种模式下除了当前使用ajax可以无刷新浏览外，还要保证直接请求改变的URL后也可以正常浏览，所以后端要对这些处理下。
+            </br>
+            1、对结合pushState的ajax可以发送一个特殊的头，如： setRequestHeader(‘PJAX’, ‘true’)。
+            </br>
+            2、后端获取到有PJAX=true的header时，将页面中通用的部分都不输出。比如：PHP可以通过下面的判断
+            </br>
+            function is_pjax(){ </br>
+            return array_key_exists('HTTP_X_PJAX', $_SERVER) && $_SERVER['HTTP_X_PJAX'] === 'true'; </br>
+            } </br>
+            <h3>参考链接：</h3>
+            <a href="http://javascript.ruanyifeng.com/bom/history.html">http://javascript.ruanyifeng.com/bom/history.html</a></br>
+            <a href="http://www.ruanyifeng.com/blog/2013/07/how_to_make_search_engines_find_ajax_content.html">http://www.ruanyifeng.com/blog/2013/07/how_to_make_search_engines_find_ajax_content.html</a></br>
+            <a href="http://www.qttc.net/201303292.html">http://www.qttc.net/201303292.html</a></br>
+            <a href="http://www.bitscn.com/school/Javascript/201411/406865.html">JavaScript不刷新实现浏览器的前进后退功能</a></br>
+            示例：<a href="http://www.zhangxinxu.com/study/201306/ajax-page-html5-history-api.html?area=pudong">http://www.zhangxinxu.com/study/201306/ajax-page-html5-history-api.html?area=pudong</a></br>
+
+        </blockquote>
+
+    </fieldset>
 
     <script type="text/javascript">
         /**
-         * history对象，用来保存浏览历史。
-         *  比如，该窗口先后访问了三个地址，那么history对象就包括三项，length属性等于3。
-         *
-         *  属性：length
-         *  方法：
-                 back()：移动到上一个访问页面，等同于浏览器的后退键。
-                 forward()：移动到下一个访问页面，等同于浏览器的前进键。
-                 go()：接受一个整数作为参数，移动到该整数指定的页面，比如go(1)相当于forward()，go(-1)相当于back()。
-                 如果移动的位置超出了访问历史的边界，以上三个方法并不报错，而是默默的失败。history.go(0);相当于刷新当前页面
-
-            history.pushState()，history.replaceState()
-                HTML5为history对象添加了两个新方法，history.pushState() 和 history.replaceState()，
-                用来在浏览历史中添加和修改记录。所有主流浏览器都支持该方法（包括IE10）
-         *  history.pushState(state，title，url)
-         *      state：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数。如果不需要这个对象，此处可以填null。
-                title：新页面的标题，但是所有浏览器目前都忽略这个值，因此这里可以填null。
-                url：新的网址，必须与当前页面处在同一个域。浏览器的地址栏将显示这个网址。
-            注意，pushState方法不会触发页面刷新。
-                 history.state属性保存当前页面的state对象。
-
-         popstate事件
-             每当同一个文档的浏览历史（即history对象）出现变化时，就会触发popstate事件。
-             需要注意的是，仅仅调用pushState方法或replaceState方法 ，并不会触发该事件，
-             只有用户点击浏览器倒退按钮和前进按钮，或者使用JavaScript调用back、forward、go方法时才会触发。
-             另外，该事件只针对同一个文档，如果浏览历史的切换，导致加载不同的文档，该事件也不会触发。
-             使用的时候，可以为popstate事件指定回调函数。这个回调函数的参数是一个event事件对象，
-             它的state属性指向pushState和replaceState方法为当前url所提供的状态对象（即这两个方法的第一个参数）。
-
-         需要注意的是，当页面第一次加载的时候，在onload事件发生后，Chrome和Safari浏览器（Webkit核心）会触发popstate事件，而Firefox和IE浏览器不会
 
 
-         参考链接：http://javascript.ruanyifeng.com/bom/history.html
-                  http://www.ruanyifeng.com/blog/2013/07/how_to_make_search_engines_find_ajax_content.html
-                  http://www.qttc.net/201303292.html
+
+
+
+
+
          *
          */
 

@@ -1,0 +1,33 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+[*]
+#set to lf, cr, or crlf to control how line breaks are represented. 参考http://www.cslog.cn/Content/cr-lf-crlf-new-line-enter/
+end_of_line = lf
+# Unix-style newlines with a newline ending every file（每个文件后空一行）
+insert_final_newline = true
+
+# Matches multiple files with brace expansion notation（匹配多个带有括号扩展标记的文件）
+# Set default charset
+charset = utf-8
+
+# 4 space indentation (4 空格缩减)
+indent_style = space
+indent_size = 4
+
+# Tab indentation (no size specified)（tab缩进）
+indent_style = tab
+
+# Indentation override for all JS under lib directory（在lib目录中缩进2个空格）
+[lib/**.js]
+indent_style = space
+indent_size = 2
+
+# Matches the exact files either package.json or .travis.yml（匹配package.json 或者 .travis.yml的文件缩进2字符）
+[{package.json,.travis.yml}]
+indent_style = space
+indent_size = 2
+#remove any whitespace characters preceding newline characters and false to ensure it doesn't.
+trim_trailing_whitespace = true

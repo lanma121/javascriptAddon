@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <fieldset>
+        <legend>isNaN</legend>
+        <blockquote>
+            作用：检查其参数是否是非数字值。</br>
+            用法：isNaN(x)</br>
+            x:必需。要检测的值。</br>
+            返回值：如果 x 是特殊的非数字值 NaN（或者能被转换为这样的值），返回的值就是 true。如果 x 是其他值,则返回 false。</br>
+            说明:</br>
+            isNaN() 函数可用于判断其参数是否是 NaN，该值表示一个非法的数字（比如被 0 除后得到的结果）。
+            如果把 NaN 与任何值（包括其自身）相比得到的结果均是 false，所以要判断某个值是否是 NaN，不能使用 == 或 === 运算符。正因为如此，isNaN() 函数是必需的。
+        <script type="text/javascript">
+            document.write("isNaN(123):"+isNaN(123)+ "<br />")
+            document.write("isNaN(-1.23):"+isNaN(-1.23)+ "<br />")
+            document.write("isNaN(5-2):"+isNaN(5-2)+ "<br />")
+            document.write("isNaN(0):"+isNaN(0)+ "<br />")
+            document.write('isNaN("Hello"):'+isNaN("Hello")+ "<br />")
+            document.write("isNaN('2005/12/12'):"+isNaN("2005/12/12")+ "<br />")
+            document.write("isNaN('12'):"+!isNaN("12")+ "<br />")
+            document.write("isNaN('2005.12'):"+!isNaN("2005.12")+ "<br />")
+            document.write("isNaN(null):"+!isNaN(null)+ "<br />")
+            document.write("isNaN([]):"+!isNaN([])+ "<br />")
+            document.write("isNaN(true):"+!isNaN(true)+ "<br />")
+            document.write("isNaN(false):"+!isNaN(false)+ "<br />")
+        </script>
+        </blockquote>
+    </fieldset>
+</body>
+</html>

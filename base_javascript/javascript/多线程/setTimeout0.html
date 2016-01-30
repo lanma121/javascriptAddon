@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <fieldset>
+        <legend>认识延迟时间为0的setTimeout</legend>
+        <blockquote>
+            <h3>前言</h3>
+            <blockquote>
+                由 John Resig 的 How JavaScript Timers Work 可以知道，现有的 JavaScript 引擎是单线程处理任务的。它把任务放到队列中，不会同步去执行，必须在完成一个任务后才开始另外一个任务。
+
+            </blockquote>
+            <blockquote>
+                <input value="focus事件" onfocus="document.getElementById('focus').innerHTML='focus'"/><span id="focus"></span></br>
+                <input value="select事件" onselect="this.select;"/><span id="slect"></span></br>
+                <input value="blur事件" onblur="document.getElementById('blur').innerHTML='blur'"/><span id="blur"></span></br>
+                <p>区别：</p>
+                <input value="focus事件" onfocus="document.getElementById('focus').innerHTML='focus'"/><span id="focus"></span></br>
+                <input value="select事件" onselect="this.select;"/><span id="slect"></span></br>
+                <input value="blur事件" onblur="document.getElementById('blur').innerHTML='blur'"/><span id="blur"></span></br>
+
+            </blockquote>
+            <blockquote>
+                var fuc = [1,2,3];</br>
+                for(var i in fuc){</br>
+                    setTimeout(function(){console.log("set:"+fuc[i])},0);</br>
+                    console.log(fuc[i]);</br>
+                }</br>
+                <img src="5.png"></br>
+                <button id="test1">打开console测试,点击测试</button>
+                <script type="text/javascript">
+                    (function(){
+                        document.getElementById("test1").onclick = function(){
+                            var fuc = [1,2,3];
+                            for(var i in fuc){
+                                setTimeout(function(){console.log("set:"+fuc[i])},0);
+                                console.log(fuc[i]);
+                            }
+                        }
+                    }())
+
+                </script>
+                <strong>说明：</strong>
+                <p>
+                    虽然setTimeout函数在每次循环的开始就调用了，但是却被放到循环结束才执行，循环结束，i=3,接连打印了3次3。
+
+                    这里涉及到javascript单线程执行的问题：javascript在浏览器中是单线程执行的，必须在完成当前任务后才执行队列中的下一个任务。
+
+                    另外，对于javascript还维护着一个setTimeout队列，未执行的setTimeout任务就按出现的顺序放到setTimeout队列，等待普通的任务队列中的任务执行完才开始按顺序执行积累在setTimeout中的任务。
+
+                    所以在这个问题里，会先打印1 2 3，而将setTimeout任务放到setTimeout任务队列，等循环中的打印任务执行完了，才开始执行setTimeout队列中的函数，所以在最后会接着打印3次3。
+
+
+
+                    由此，可以知道虽然设置为0秒后执行任务，实际上是大于0秒才执行的。可是这有什么用呢？
+
+                    用处就在于我们可以改变任务的执行顺序！因为浏览器会在执行完当前任务队列中的任务，再执行setTimeout队列中积累的的任务。
+
+                    通过设置任务在延迟到0s后执行，就能改变任务执行的先后顺序，延迟该任务发生，使之异步执行。
+                </p>
+            </blockquote>
+
+            <blockquote>
+                <h3>总结</h3>
+                    在实践中，setTimeout 会在其完成当前任何延宕事件的事件处理器的执行，以及完成文档当前状态更新后，告诉浏览器去启用 setTimeout 内注册的函数。
+                其实，这是一个把需要执行的任务从队列中跳脱的技巧。回到前面的例子，JavaScript 引擎在执行 onkeypress 时，由于没有多线程的同步执行，不可能同时去处理刚创建元素的 focus 和 select 事件，由于这两个事件都不在队列中，在完成 onkeypress 后，JavaScript 引擎已经丢弃了这两个事件，正如你看到的例子 1 的情况。而在例子 2 中，由于setTimeout可以把任务从某个队列中跳脱成为新队列，因而能够得到期望的结果。
+
+                这才是延迟事件为 0 的setTimeout的真正目的。在此，你可以看看例子 3，它的任务是实时更新输入的文本，现在请试试，你会发现预览区域总是落后一拍，比如你输 a, 预览区并没有出现 a, 在紧接输入 b 时， a 才不慌不忙地出现。其实我们是有办法让预览区跟输入框同步地，在此我没有给出答案，因为上面所说的，就是解决思路，try it yourself!
+            </blockquote>
+        </blockquote>
+
+    </fieldset>
+</body>
+</html>

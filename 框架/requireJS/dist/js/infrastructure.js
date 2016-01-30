@@ -1,0 +1,1 @@
+define("infrastructure",[],function(){return alert(this),this.name="This is infrastructure.js",this});

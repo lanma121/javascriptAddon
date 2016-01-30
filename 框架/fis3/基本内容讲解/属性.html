@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<fieldset>
+    <legend><h1>配置API</h1></legend>
+    <blockquote>fis.set():设置一些配置，如系统内置属性 project、namespace、modules、settings。 fis.set 设置的值通过fis.get()获取</blockquote>
+    <blockquote>fis.get():获取已经配置的属性，和 fis.set() 成对使用</blockquote>
+    <blockquote>fis.match():给匹配到的文件分配属性</blockquote>
+    <blockquote>fis.media():是模仿自 css 的 @media，表示不同的状态</blockquote>
+    <blockquote>fis.plugin():插件调用接口</blockquote>
+    <p>具体参考<a href="http://fis.baidu.com/fis3/docs/api/config-api.html">http://fis.baidu.com/fis3/docs/api/config-api.html</a></p>
+
+</fieldset>
+<fieldset>
+    <legend><h1>属性</h1></legend>
+    <blockquote>
+        <h3>全局属性</h3>
+        <p>全局属性通过 fis.set 设置(如系统内置属性 project、namespace、modules、settings)，通过 fis.get 获取；</p>
+        <blockquote>project.charset:指定项目编译后产出文件的编码</blockquote>
+        <blockquote>project.md5Length:文件MD5戳长度</blockquote>
+        <blockquote>project.md5Connector：设置md5与文件的连字符。</blockquote>
+        <blockquote>project.files：设置项目源码文件过滤器。</blockquote>
+        <blockquote>project.ignore：排除某些文件</blockquote>
+        <blockquote>project.fileType.text：追加文本文件后缀列表。</blockquote>
+        <blockquote>project.fileType.image：追加图片类二进制文件后缀列表。</blockquote>
+    </blockquote>
+    <blockquote>
+        <h3>文件属性</h3>
+        <p>fis3 以文件属性控制文件的编译合并以及各种操作；文件属性包括基本属性和插件属性，插件属性是为了方便在不同的插件扩展点设置插件；</p>
+        <blockquote>release：设置文件的产出路径。默认是文件相对项目根目录的路径，以 / 开头。该值可以设置为 false ，表示为不产出（unreleasable）文件。</blockquote>
+        <blockquote>packTo：分配到这个属性的文件将会合并到这个属性配置的文件中</blockquote>
+        <blockquote>project.md5Connector：设置md5与文件的连字符。</blockquote>
+        <blockquote>project.files：设置项目源码文件过滤器。</blockquote>
+        <blockquote>project.ignore：排除某些文件</blockquote>
+        <blockquote>project.fileType.text：追加文本文件后缀列表。</blockquote>
+        <blockquote>project.fileType.image：追加图片类二进制文件后缀列表。</blockquote>
+    </blockquote>
+    <p>具体属性参考：<a href="http://fis.baidu.com/fis3/docs/api/config-props.html">http://fis.baidu.com/fis3/docs/api/config-props.html</a></p>
+
+</fieldset>
+</body>
+</html>

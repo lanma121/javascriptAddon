@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../../jquery-1.11.3.min.js"></script>
+</head>
+<body>
+<fieldset>
+    <legend>验证radio</legend>
+    <p>
+        <em> 一组radio的name属性必须一样才能单选 </em>
+
+    </p>
+    <form action='' method='post'>
+        <input type='radio' value='1' name='radio' checked='checked'>一;
+        <input type='radio' value='2' name='radio'>二;
+        <input type='radio' value='3' name='radio'>三;
+        <input type='radio' value='4' name='radio'>四;
+        <input type='radio' value='5' name='radio'>五;
+        <input type="button" value="js验证" onclick="check_radio();" >
+        <input type="button" value="jquery验证" onclick="checkRadio();" >
+    </form>
+</fieldset>
+
+<script type="text/javascript">
+
+    function check_radio(){
+        var chkObjs = document.getElementsByName("radio");
+        for(var i=0;i<chkObjs.length;i++){
+            if(chkObjs[i].checked){
+                chk = i;
+                alert(chkObjs[i].value);
+                break;
+            }
+        }
+    }
+
+    function checkRadio(){
+        var kk = $('input[name="radio"]:checked');
+        alert(kk.val());
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <fieldset>
+        <legend>Prototype、__proto__与Object、Function关系介绍</legend>
+        <blockquote>
+            <h3>Function、Object</h3>
+            <blockquote>
+                Js自带的函数对象。
+            </blockquote>
+            <h3>prototype</h3>
+            <blockquote>
+                每一个函数对象都有一个显示的prototype属性,它代表了对象的原型(Function.prototype函数对象是个例外，没有prototype属性)。__proto__是内部原型，prototype是构造器原型（构造器其实就是函数）
+                所有构造器/函数的__proto__都指向Function.prototype，它是一个空函数
+            </blockquote>
+            <h3>__proto__</h3>
+            <blockquote>
+                每个对象都有一个名为__proto__的内部隐藏属性，指向于它所对应的原型对象(chrome、firefox中名称为__proto__，并且可以被访问到)。原型链正是基于__proto__才得以形成(note：不是基于函数对象的属性prototype，prototype是函数的内置属性，__proto__是对象的内置属性)。
+            </blockquote>
+            <h3>理解__proto__与prototype的关系</h3>
+            <blockquote>
+                <h5>new 过程</h5>
+                var Person = function () { };</br>
+                var p = new Person();</br>
+                很简单的一段代码，我们可以把new的过程拆分成以下三步：</br>
+                <1> var p={}; 也就是说，初始化一个对象p。</br>
+                <2> p.__proto__=Person.prototype;</br>
+                <3> Person.call(p);也就是说构造p，也可以称之为初始化p。</br>
+                那么__proto__是什么？每个对象都会在其内部初始化一个属性，就是__proto__，当我们访问一个对象的属性 时，如果这个对象内部不存在这个属性，那么他就会去__proto__里找这个属性，这个__proto__又会有自己的__proto__，于是就这样 一直找下去，也就是我们平时所说的原型链的概念。
+                <h5>__proto__与prototype</h5>
+                var Person = function () { };</br>
+                Person.prototype.Say = function () {</br>
+                	alert("Person say");</br>
+                }</br>
+                var p = new Person();</br>
+                p.Say();</br>
+                首先var p=new Person()；可以得出p.__proto__=Person.prototype。</br>
+                那么当我们调用p.Say()时，首先p中没有Say这个属性， 于是，他就需要到他的__proto__中去找，也就是Person.prototype，而我们在上面定义了 Person.prototype.Say=function(){}; 于是，就找到了这个方法
+                <h5>__proto__与prototype复杂例子</h5>
+                var Person = function () { };</br>
+                Person.prototype.Say = function () {</br>
+                    alert("Person say");</br>
+                }</br>
+                Person.prototype.Salary = 50000;</br>
+                var Programmer = function () { };</br>
+                Programmer.prototype = new Person();</br>
+                Programmer.prototype.WriteCode = function () {</br>
+                    alert("programmer writes code");</br>
+                };</br>
+                Programmer.prototype.Salary = 500;</br>
+                var p = new Programmer();</br>
+                p.Say();</br>
+                p.WriteCode();</br>
+                alert(p.Salary);</br>
+                </br>
+                var p=new Programmer()可以得出p.__proto__=Programmer.prototype;</br>
+                而在上面我们指定了Programmer.prototype=new Person();我们来这样拆分，var p1=new Person();Programmer.prototype=p1;那么:</br>
+                p1.__proto__=Person.prototype;</br>
+                Programmer.prototype.__proto__=Person.prototype;</br>
+                由根据上面得到p.__proto__=Programmer.prototype。可以得到p.__proto__.__proto__=Person.prototype。</br>
+                清楚了之后我们来看上面的结果,p.Say()。由于p没有Say这个属性，于是去p.__proto__，也就是 Programmer.prototype，也就是p1中去找，由于p1中也没有Say，那就去p.__proto__.__proto__，也就是 Person.prototype中去找，于是就找到了alert(“Person say”)的方法。</br>
+                </br>
+                <strong>其实prototype只是一个假象，他在实现原型链中只是起到了一个辅助作用，换句话说，他只是在new的时候有着一定的价值，而原型链的本质，其实在于__proto__！</strong>
+            </blockquote>
+            <h3>关于上面提到的函数对象，我们来看以下例子，来说明：</h3>
+            <blockquote>
+                var o1 = {};</br>
+                var o2 =new Object();</br>
+                function f1(){}</br>
+                var f2 = function(){}</br>
+                var f3 = new Function('str','console.log(str)');</br>
+                f3('aabb');   // aabb</br>
+                console.log('typeof Object:'+typeof Object);            //function</br>
+                console.log('typeof Function:'+typeof Function);        //function</br>
+                console.log('typeof o1:'+typeof o1);   //object</br>
+                console.log('typeof o2:'+typeof o2);   //object</br>
+                console.log('typeof f1:'+typeof f1);   //function</br>
+                console.log('typeof f2:'+typeof f2);   //function</br>
+                console.log('typeof f3:'+typeof f3);   //function</br>
+                <h6>通常我们认为o1、o2是对象，即普通对象；f1、f2、f3为函数。</h6>
+                <h6>但是其实函数也是对象，是由Function构造的，</h6>
+                <h6>f3这种写法就跟对象的创建的写法一样。f1、f2最终也都像f3一样是有Function这个函数构造出来的</h6>
+                <h6>f1、f2、f3为函数对象，Function跟Object本身也是函数对象。</h6>
+            </blockquote>
+            <h3>Js中每个对象(null除外)都和另一个对象相关联，通过以下例子跟内存效果图来分析Function、Object、Prototype、__proto__对象间的关系。</h3>
+            <blockquote>
+                <script type="text/javascript">console.log(Function.prototype)</script>
+                /********************* 系统定义的对象Array、Date ****************************/</br>
+                console.log('**************test Array、Date****************');</br>
+                var array = new Array();</br>
+                var date = new Date();</br>
+                console.log('array.__proto__===Array.prototype:'+(array.__proto__===Array.prototype));   //true</br>
+                console.log('Array.__proto__===Function.prototype:'+(Array.__proto__===Function.prototype));  //true</br>
+                console.log('date.__proto__===Date.prototype:'+(date.__proto__===Date.prototype));    //true</br>
+                console.log('Date.__proto__===Function.prototype:'+(Date.__proto__===Function.prototype));     //true</br>
+                </br>
+                说明了Array等都是构造器，这些构造器其实是Function的一个对象。 也就是说相当于 var Array = new Function();</br>
+                JavaScript中有内置(build-in)构造器/对象共计12个（ES5中新加了JSON），可访问的9个构造器是：Number，Boolean，String，Object，Function，Array，RegExp，Error，Date。剩下如Global不能直接访问，Arguments仅在函数调用时由JS引擎创建，Math，JSON是以对象形式存在的，无需new。它们的__proto__是Object.prototype。</br>
+                </br>
+                /********************* 自定义的对象 ****************************/</br>
+                console.log('***********自定义的 proto*****************');</br>
+                function Animal(){</br>
+                </br>
+                }</br>
+                var  anim = new Animal();</br>
+                console.log('typeof Animal.prototype:' +typeof Animal.prototype);  //object</br>
+                console.log('anim.__proto__===Animal.prototype:'+(anim.__proto__===Animal.prototype));  //true</br>
+                console.log('Animal.__proto__===Function.prototype:'+(Animal.__proto__===Function.prototype));  //true</br>
+                console.log('Animal.prototype.__proto__===Object.prototype:'+(Animal.prototype.__proto__===Object.prototype));  //true</br>
+                </br>
+                所有的构造器都来自于Function.prototype，甚至包括根构造器Object及Function自身。所有构造器都继承了Function.prototype的属性及方法。如length、call、apply、bind（ES5）。
+                </br></br>
+                Function.prototype也是唯一一个typeof XXX.prototype为 “function”的prototype。其它的构造器的prototype都是一个对象。
+                console.log('***********Function proto*****************');</br>
+                console.log('typeof Function.prototype:'+typeof Function.prototype);  //function</br>
+                console.log('typeof Function.__proto__:'+typeof Function.__proto__);  //function</br>
+                console.log('typeof Function.prototype.prototype:'+typeof Function.prototype.prototype); //undefined</br>
+                console.log('typeof Function.prototype.__proto__:'+typeof Function.prototype.__proto__);   //object</br>
+                console.log('Function.prototype===Function.__proto__:'+(Function.prototype===Function.__proto__)); //true</br>
+                </br>
+                console.log('***********Object proto*****************');</br>
+                console.log('typeof Object.prototype:'+typeof Object.prototype);  //object</br>
+                console.log('typeof Object.__proto__:'+typeof Object.__proto__);  //function</br>
+                console.log('Object.prototype.prototype:'+Object.prototype.prototype);  //undefied</br>
+                console.log('Object.prototype.__proto__===null:'+(Object.prototype.__proto__===null));  //null</br>
+                </br>
+                console.log('***********Function Object  proto关系*****************');</br>
+                console.log('Function.prototype===Object.__proto__:'+(Function.prototype===Object.__proto__));   //true</br>
+                console.log('Function.__proto__===Object.__proto__:'+(Function.__proto__===Object.__proto__));   //true</br>
+                console.log('Function.prototype.__proto__===Object.prototype:'+(Function.prototype.__proto__===Object.prototype));   //true</br>
+                </br>
+
+            </blockquote>
+            <h3>Function、Object、Prototype、__proto__内存关系图</h3>
+            <blockquote>
+                <img src="images/Function-Objec-Prototype-__proto__内存关系图.png">
+                <img src="images/堆区图说明.png"></br>
+                <em>Function.prototype函数对象图内部表示prototype属性的红色虚框，只是为了说明这个属性不存在。</em></br>
+                <a href="http://www.cnblogs.com/fool/archive/2010/10/07/1845226.html">参照文章Javascript_01_理解内存分配。</a></br>
+            </blockquote>
+            <h3>通过上图Function、Object、Prototype关系图中，可以得出一下几点：</h3>
+            <blockquote>
+                所有对象所有对象，包括函数对象的原型链最终都指向了Object.prototype，而Object.prototype.__proto__===null，原型链至此结束。</br>
+                Animal.prototype是一个普通对象。</br>
+                Object是一个函数对象，也是Function构造的，Object.prototype是一个普通对象。</br>
+                Object.prototype.__type__指向null。</br>
+                Function.prototype是一个函数对象，前面说函数对象都有一个显示的prototype属性，但是Function.prototype却没有prototype属性，即Function.prototype.prototype===undefined，所有Function.prototype函数对象是一个特例，没有prototype属性。</br>
+                Object虽是Function构造的一个函数对象，但是Object.prototype没有指向Function.prototype，即Object.prototype!==Function.prototype。</br>
+            </blockquote>
+            参考：</br>
+            http://www.cnblogs.com/fool/category/264215.html (javascript原理介绍)</br>
+            http://www.libuchao.com/2012/05/14/prototypes-in-javascript/ (JavaScript 的原型对象 Prototype)</br>
+            http://rockyuse.iteye.com/blog/1426510 (理解js中的原型链，prototype与__proto__的关系)</br>
+            https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
+        </blockquote>
+    </fieldset>
+</body>
+</html>

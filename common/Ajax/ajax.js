@@ -1,13 +1,42 @@
+
 /**
- * Created by Administrator on 2015/7/3 0003.
+ * XMLHttpRequest.readyState: 状态码
+     0 － （未初始化）还没有调用send()方法
+     1 － （载入）已调用send()方法，正在发送请求
+     2 － （载入完成）send()方法执行完成，已经接收到全部响应内容
+     3 － （交互）正在解析响应内容
+     4 － （完成）响应内容解析完成，可以在客户端调用了
+ * XMLHttpRequest.status
+     1xx-信息提示
+     这些状态代码表示临时的响应。客户端在收到常规响应之前，应准备接收一个或多个1xx响应。
+     2xx-成功
+     这类状态代码表明服务器成功地接受了客户端请求。
+     3xx-重定向
+     客户端浏览器必须采取更多操作来实现请求。例如，浏览器可能不得不请求服务器上的不同的页面，或通过代理服务器重复该请求。
+     4xx-客户端错误
+     发生错误，客户端似乎有问题。例如，客户端请求不存在的页面，客户端未提供有效的身份验证信息。400-错误的请求。
+     5xx-服务器错误
+     服务器由于遇到错误而不能完成该请求。
+     FTP
+     1xx-肯定的初步答复
+     这些状态代码指示一项操作已经成功开始，但客户端希望在继续操作新命令前得到另一个答复。
+     2xx-肯定的完成答复
+     一项操作已经成功完成。客户端可以执行新命令。200命令确定。
+     3xx-肯定的中间答复
+     该命令已成功，但服务器需要更多来自客户端的信息以完成对请求的处理。331用户名正确，需要密码。
+     4xx-瞬态否定的完成答复
+     该命令不成功，但错误是暂时的。如果客户端重试命令，可能会执行成功。421服务不可用，正在关闭控制连接。如果服务确定它必须关闭，将向任何命令发送这一应答。
+     5xx-永久性否定的完成答复
+     该命令不成功，错误是永久性的。如果客户端重试命令，将再次出现同样的错误。500语法错误，命令无法识别。这可能包括诸如命令行太长之类的错误。
  */
+
 
 
 (function($){
     if(!$){alert("请引入jQuery ----");return;}
     var ajax = function(){
         var parameters = arguments;
-        $.ajax({
+        var ajaxObj = {
             url: parameters[0],                                                     //默认值: 当前页地址。发送请求的地址。
             type: parameters[1] ? parameters[1] : "GET",                            //默认值: "GET"。请求方式 ("POST" 或 "GET") 注意：其它 HTTP 请求方法，如 PUT 和 DELETE 也可以使用，但仅部分浏览器支持。
             success:function(result,status,XMLHttpRequest ){                        //请求成功后的回调函数。参数：result:由服务器返回，并根据 dataType 参数进行处理后的数据；status:描述状态的字符串,success。
@@ -33,12 +62,14 @@
                 if (window.console && window.console.log)console.log(" ajax completing--------------status:"+TS+";  XHR.readyState:"+XHR.readyState);
                 parameters[8] ? parameters[8](XHR.readyState):false;
             },
-            error:function(XMLHttpRequest, textStatus, errorThrown){
+            error:function(XMLHttpRequest, textStatus, errorThrown){//有以下三个参数：XMLHttpRequest 对象、错误信息、（可选）捕获的异常对象。
+                //如果发生了错误，错误信息（第二个参数）除了得到 null 之外，还可能是 "timeout", "error", "notmodified" 和 "parsererror"。
                 if (window.console && window.console.log)console.log("------------ajax 请求错误--------------------");
                 if (window.console && window.console.log)console.log("XMLHttpRequest.readyState:"+XMLHttpRequest.readyState+";XMLHttpRequest.status"+XMLHttpRequest.status);
                 if (window.console && window.console.log)console.log("textStatus:"+textStatus+";errorThrown:"+errorThrown);
             }
-        });
+        };
+        var XMLHttpRequest = $.ajax(ajaxObj);//返回XMLHttpRequest对象
     }
 //contentType:"", //默认值: "application/x-www-form-urlencoded"。发送信息至服务器时内容编码类型。默认值适合大多数情况。如果你明确地传递了一个 content-type 给 $.ajax() 那么它必定会发送给服务器（即使没有数据要发送）。
  //context:"",//类型：Object 这个对象用于设置 Ajax 相关回调函数的上下文。也就是说，让回调函数内 this 指向这个对象（如果不设定这个参数，那么 this 就指向调用本次 AJAX 请求时传递的 options 参数）。比如指定一个 DOM 元素作为 context 参数，这样就设置了 success 回调函数的上下文为这个 DOM 元素。

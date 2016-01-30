@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <fieldset>
+        <legend>资源定位</legend>
+        <blockquote>
+            如上，构建过程中对资源 URI 进行了替换，替换成了绝对 URL。通俗点讲就是相对路径换成了绝对路径。
+
+            这是一个 FIS 的很重要的特性，资源定位。
+
+            资源定位能力，可以有效的分离开发路径与部署路径之间的关系，工程师不再关心资源部署到线上之后去了哪里，变成了什么名字，这些都可以通过配置来指定。而工程师只需要使用相对路径来定位自己的开发资源即可。这样的好处是 资源可以发布到任何静态资源服务器的任何路径上而不用担心线上运行时找不到它们，而且代码 具有很强的可移植性，甚至可以从一个产品线移植到另一个产品线而不用担心线上部署不一致的问题。
+
+            在默认不配置的情况下只是对资源相对路径修改成了绝对路径。通过配置文件可以轻松分离开发路径（源码路径）与部署路径。比如我们想让所有的静态资源构建后到 static 目录下。
+            <em>
+                fis.match('*.{png,js,css}', {
+                    release: '/static/$0'
+                });
+            </em>
+        </blockquote>
+        <blockquote>
+            <h1>在html中定位资源</h1>
+            FIS3 支持对html中的script、link、style、video、audio、embed等标签的src或href属性进行分析，一旦这些标签的资源定位属性可以命中已存在文件，则把命中文件的url路径替换到属性中，同时可保留原来url中的query查询信息。
+
+            例如：
+
+            <p>源码-->  < img title="百度logo" src="images/logo.gif"/></p>
+            <p>编译后-->< img title="百度logo" src="/images/logo_74e5229.gif"/></p>
+        </blockquote>
+        <blockquote>
+            <h3>我们甚至可以让 url和发布目录不一致。比如：</h3>
+            fis.match('*.{js,css,png,gif}', {</br>
+                useHash: true // 开启 md5 戳</br>
+            });</br>
+            // 所有的 js</br>
+            fis.match('**.js', {</br>
+                //发布到/static/js/xxx目录下</br>
+                release : '/static/js$0',</br>
+                //访问url是/mm/static/js/xxx</br>
+                url : '/mm/static/js$0'</br>
+            });</br>
+            再次编译得到：</br>
+            源码：</br>
+            < script type="text/javascript" src="demo.js">< /script></br>
+            编译后--></br>
+            < script type="text/javascript" src="/mm/static/js/demo_33c5143.js">< /script>
+        </blockquote>
+        <blockquote>
+            <h1>在js中定位资源</h1>
+            js语言中，可以使用编译函数 __uri(path) 来定位资源，fis分析js文件或 html中的script标签内内容 时会替换该函数所指向文件的线上url路径。
+            </br>例如：
+
+            <p>源码-->  var img = __uri('images/logo.gif');</p>
+            <p>编译后-->var img = '/images/logo_74e5229.gif';</p>
+        </blockquote>
+        <blockquote>
+            <h1>在css中定位资源</h1>
+            fis编译工具会识别css文件或 html的style标签内容 中 url(path) 以及 src=path 字段，并将其替换成对应资源的编译
+            </br>例如：
+
+            <p>源码-->   @import url('demo.css');</p>
+            <p>编译后--> @import url('/demo_7defa41.css');</p>
+        </blockquote>
+    </fieldset>
+</body>
+</html>

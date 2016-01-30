@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../../jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+
+       console.log(document===$(document).context)
+
+    </script>
+</head>
+<body>
+<div class="jdom" id="jdom" name="jdom"></div>
+<div class="jdom" name="jdom"></div>
+<div class="jdom" name="jdom"></div>
+    <fieldset>
+        <legend>dom对象</legend>
+        <blockquote>
+            <h3>document对象</h3>
+            <button onclick="console.log(document)">打开console，点击查看js</button>
+            <button onclick="console.log($(document))">打开console，点击查看jQuery</button>
+            <p>
+                <em>区别：</em>
+                <p>js是document对象本身，jQuery包含0,context,lenght,_proto_属性</p>
+                document[0],document.context与document的对象本身相等，都包含一些document本身具有的属性</br>
+                lenght，代表document对象的数量</br>
+                _proto_属性是document具有jQuery的属性和方法</br>
+            </p>
+        </blockquote>
+        <blockquote>
+            <h3>jquery 中的$("dom")数组<button onclick="console.log($('.jdom'))">打开console，点击查看</button> </h3>
+            <blockquote>
+                1.包含每个元素自身具有的属性和方法，依次为0,1,2...数组</br>
+                2.包含lenght属性</br>
+                3.context属性是document对象</br>
+                4.prevObject属性是document的jQuery对象</br>
+                5.selector属性，jQuery选择器</br>
+                6.__proto__属性，继承jQuery一些方法和属性</br>
+            </blockquote>
+            <h3>js 中的document.getElementsByClassName数组<button onclick="console.log(document.getElementsByClassName('jdom'))">打开console，点击查看</button> </h3>
+            <blockquote>
+                1.包含每个元素自身具有的属性和方法，依次为0,1,2...数组,指定id者，直接有id的每个对象</br>
+                2.包含lenght属性</br>
+                3._proto_属性，继承HTMLCollection
+            </blockquote>
+            <h3>js 中的document.getElementsByName数组<button onclick="console.log(document.getElementsByName('jdom'))">打开console，点击查看</button> </h3>
+            <blockquote>
+                1.包含dom自身具有的属性和方法的每个元素，依次为0,1,2...排序</br>
+                2.包含lenght属性，获取dom的数量</br>
+                3.包含_proto_属性，继承NodeList
+
+            </blockquote>
+            <div>jquery 中的$("dom")，$(this) <button onclick="console.log($(this))">打开console，点击查看</button> </div>
+            <blockquote>
+                1.本对象的jQuery对象
+
+            </blockquote>
+            <div>jquery 中的dom,this <button onclick="console.log(this)">打开console，点击查看</button> </div>
+            <blockquote>
+                1.本对象
+
+            </blockquote>
+        </blockquote>
+    </fieldset>
+</body>
+</html>

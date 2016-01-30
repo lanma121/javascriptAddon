@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <input type="number" name="points" min="0" max="10" />HTML5新属性，max 和 min 属性适用于以下input类型：number, range, date, datetime, datetime-local, month, time 以及 week。Internet Explorer 9 以及更早的版本不支持 type="number" 元素</br>
+    <input type="number" name="points" step="3" />HTML5新属性，step 属性规定输入字段的合法数字间隔（假如 step="3"，则合法数字应该是 -3、0、3、6，以此类推）。Internet Explorer 9 以及更早的版本不支持type="number" 元素</br>
+    <input type="color" list="url_list" value="" />HTML5新属性，type="color" Internet Explorer 和 Safari 不支持type="color"元素,value为选择颜色的值。</br>
+    <input type="date" id="myDate" value="2014-06-01">HTML5新属性，type="date" Internet Explorer 或 Firefox 不支持type="date" 元素。,value为选择日期的值。</br>
+    <input type="datetime" id="myDatetime" value="2014-06-01T10:55Z">HTML5新属性，type="datetime" Internet Explorer、Firefox 或者 Chrome 不支持type="datetime"元素，Safari 中部分支持。Opera 12 以及更早的版本中完全支持。</br>
+    <input type="month" id="myMonth" value="2014-05">HTML5新属性，type="month" Internet Explorer 或 Firefox 不支持  type="month"元素。</br>
+    <input type="week" id="myWeek" value="2014-W15">HTML5新属性，type="week" Internet Explorer 或 Firefox 不支持 type="week" 元素。</br>
+    <input type="time" id="myTime" value="2014-02-14">HTML5新属性，type="time" Internet Explorer 或 Firefox 不支持  type="time"元素。</br>
+    <input type="email" id="myEmail" value="w3c@example.com">HTML5新属性，type="email" Internet Explorer 9（以及更早的版本）或 Safari 不支持type="email"元素。。</br>
+    <input type="range" id="myRange">HTML5新属性，type="range" ：Internet Explorer 9 以及更早的版本不支持type="range"元素。。</br>
+    <input type="search" id="mySearch" placeholder="搜索..">HTML5新属性，type="search" ：Internet Explorer 9（以及更早的版本）或 Safari 不支持 type="search" 元素。</br>
+    <input type="url" id="myURL" value="http://www.google.com">HTML5新属性，type="url" ：Internet Explorer 9（以及更早的版本）或 Safari 不支持 type="url" 元素。</br>
+    <input type="image" id="myimage" src="../../addon/图片/images/eg_planets.jpg">type="image"表示 HTML  "image" 元素。</br>
+    <datalist id="url_list">
+        <option label="W3Schools" value="http://www.w3schools.com" />
+        <option label="Google" value="http://www.google.com" />
+        <option label="Microsoft" value="http://www.microsoft.com" />
+    </datalist>
+    <input type="text" list="url_list" value="" />list HTML5新特性，属性引用数据列表，其中包含输入字段的预定义选项。</br>
+    <input type="text" name="email" maxlength="5" />maxlength 属性规定输入字段的最大长度，以字符个数计。</br>
+    <input type="text" name="country_code" pattern="[A-z]{3}" /> HTML5 中的新属性,pattern 属性规定用于验证输入字段的模式。</br>
+    <input type="text" name="usr_name" required="required" /> HTML5 中的新属性,required 属性规定必需在提交之前填写输入字段。</br>
+    <input type="search" name="user_search" placeholder="Search W3School" /> HTML5 中的新属性,placeholder 属性提供可描述输入字段预期值的提示信息（hint）。</br>
+    <input type="text" autocomplete="on" value=""/>autocomplete 属性规定输入字段是否应该启用自动完成功能。</br>
+    <input type="text" autofocus="autofocus" value="" />autofocus规定输入字段在页面加载时是否获得焦点。</br>
+    <input type="text" disabled="disabled" value="disabled"/>disabled禁用此元素</br>
+    <input type="submit" formaction="demo_admin.asp" value="submit"/>formactionHTML5新属性,覆盖 form 元素的 action 属性,适用于type=submit 以及 type=image</br>
+    <input type="submit" formmethod="post" value="submit" />formactionHTML5新属性,覆盖表单的 method 属性。,适用于type=submit 以及 type=image</br>
+    <input type="submit" formenctype="application/x-www-form-urlencodedd" value="submit" />formenctype 属性覆盖 form 元素的 enctype 属性,适用于type=submit 以及 type=image</br>
+    enctype = application/x-www-form-urlencoded	在发送前对所有字符进行编码（默认）。
+    enctype = multipart/form-data	不对字符编码。当使用有文件上传控件的表单时，该值是必需的。
+    enctype = text/plain	将空格转换为 "+" 符号，但不编码特殊字符。</br>
+    <input type="file" name="img" multiple="multiple" />HTML5 中的新属性，multiple 属性规定输入字段可选择多个值。适用类型：email 和 file。</br>
+    FileUpload 对象
+    在 HTML 文档中 input type="file" 标签每出现一次，一个 FileUpload 对象就会被创建。
+    该元素包含一个文本输入字段，用来输入文件名，还有一个按钮，用来打开文件选择对话框以便图形化选择文件。
+    该元素的 value 属性保存了用户指定的文件的名称，但是当包含一个 file-upload 元素的表单被提交的时候，浏览器会向服务器发送选中的文件的内容而不仅仅是发送文件名。
+    为安全起见，file-upload 元素不允许 HTML 作者或 JavaScript 程序员指定一个默认的文件名。HTML value 属性被忽略，并且对于此类元素来说，value 属性是只读的，这意味着只有用户可以输入一个文件名。当用户选择或编辑一个文件名，file-upload 元素触发 onchange 事件句柄。
+    您可以通过遍历表单的 elements[] 数组，或者通过使用 document.getElementById()来访问 FileUpload 对象。
+</body>
+</html>
