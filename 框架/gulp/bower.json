@@ -1,0 +1,36 @@
+{
+  "name": "bower",
+  "homepage": "https://github.com/lanma121/javascriptAddon",
+  "authors": [
+    "lanma121 <786716597@qq.com>"
+  ],
+  "description": "搜索、安装和卸载如JavaScript、HTML、CSS之类的网络资源",
+  "main": "",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node",
+    "yui"
+  ],
+  "keywords": [
+    "节省时间",
+    "脱机工作展现",
+    "客户端的依赖关系",
+    "升级简单"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "js/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.0",
+    "layer": "*"
+  }
+}

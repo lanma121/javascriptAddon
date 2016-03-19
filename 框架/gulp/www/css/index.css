@@ -1,0 +1,9 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: url("../img/adam.jpg");
+}
+div {
+    display: flex;
+    background: url("../img/ben.png");
+}

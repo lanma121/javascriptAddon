@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style type="text/css">
+
+        body{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <link href="../css/index.css" rel="stylesheet">
+    <!-- inject:css -->
+    <!-- endinject -->
+<script src="../js/a.js"></script>
+<script src="../js/b.js"></script>
+<script src="../../../../require.js"></script>
+    <!--<script src="//cdn.bootcss.com/handlebars.js/2.0.0-beta.1/handlebars.runtime.js"></script>-->
+    <!--<script src="../js/templates.js"></script>-->
+</head>
+<body>
+<!--[if IE]> <script>alert(111);</script><![endif]-->
+
+<form>
+<!--ddsfdfsf-->
+    <input type="radio" name="dd" checked="true" class="">
+</form>
+<div id="app"></div>
+<script type="text/javascript">
+//this is alert
+    alert(1!='');
+alert(222);
+//document.querySelector('#app').innerHTML = MyApp.templates.App();
+</script>
+<script>
+    require(['../js/templates.js'], function(template) {
+        // This will render the template defined by App.header.hbs
+        var context = {title: "My New Post", body: "This is my first post!"}
+        document.querySelector('#app').innerHTML = template(context);
+    });
+</script>
+</body>
+</html>
