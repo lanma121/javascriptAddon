@@ -5,7 +5,8 @@
  */
 (function($){
     $.fn.fTriggerEveByDomPosition = function(width, height, coords, callback){
-        var  cursor = $(this).css("cursor");
+        var cursor = $(this).css("cursor");
+        //var bIsImg = this[0].nodeName==="IMG";
         $(this).on("click mousemove",function(e){
             var
                 nRatioWidth = $(this).width() / width,
