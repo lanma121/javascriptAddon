@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="../../../jquery-1.11.3.min.js"></script>
+    <script>
+//        document.domain = "www.yungou.cn";
+        function ffdomain(data){
+            console.log("---------------------");
+            console.log(data)
+            console.log(document.getElementById("iframe").contentWindow)
+            console.log($("pre",document.getElementById("iframe").document).text());//jquery 方法2
+        }
+
+//        $.getJSON("http://map.baidu.com/?qt=operateData&getOpModules=op1%2Cop2%2Cop3%2Cop4%2Cop5%2Cop6%2Cop7?callback=?",           function(data){
+//                console.log(data)
+//            });
+
+
+        window.name="A.THML"
+
+    </script>
+    <!--<script src="http://www.yungou.cn/detail/2002881.html?callback=domain"></script>-->
+<!--    <script src="http://map.baidu.com/?qt=operateData&getOpModules=op1%2Cop2%2Cop3%2Cop4%2Cop5%2Cop6%2Cop7?callback=?"></script>-->
+
+
+</head>
+<body>
+
+
+    <!--<iframe src="http://www.yungou.cn/api.do?goods_id=2005315&num=50&page=2&action=getRecords" id="iframe" onload="ffdomain(this)"></iframe>-->
+
+
+
+    <script type="text/javascript">
+        var kk = window.open("http://www.baidu.com");
+        alert(kk);
+    </script>
+</body>
+</html>

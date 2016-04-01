@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="../../jquery-1.11.3.min.js"></script>
+</head>
+<body>
+
+<div style="width: 800px;height: 600px;border: 1px solid red;">
+   <!-- <div style="width: 100px;float: left;border: 1px solid darkorange;"></div>-->
+    <div style="border: 1px solid forestgreen;width: 500px;margin: auto"></div>
+
+</div>
+<script>
+    function Animal(){}
+    console.log(window[scope]);
+    var anim = new Animal();
+    Animal.prototype.p = function(){
+        console.log("-----------------");
+    }
+
+    console.log(anim.constructor===Animal); //true
+    console.log(anim.__proto__.constructor===Animal); //true
+    console.log(Animal.prototype.constructor===Animal); //true
+    console.log(Animal.prototype.__proto__.constructor===Object); //true
+    console.log(Function.prototype.__proto__.constructor===Object); //true
+    function A() {
+        this.name = 'aaaa';
+        this.age = 11;
+        this.fun = function(){
+            return this.name;
+        }
+        this.funm = function(){
+            return this.sex;
+        }
+    }
+
+    function B() {
+        this.name = "bbbb";
+        this.age = 22;
+        this.sex = "男";
+        this.fun = function(){
+            return this.name;
+        }
+        this.funp = function(){
+            return this.age;
+        }
+    }
+    B.prototype = new A();
+    A.prototype = new B();
+    var a = new A();
+    var b = new B();
+    console.log(a); //a实例的\_\_proto\_\_指向A.prototype,即B的实例
+    console.log(b); //b实例的\_\_proto\_\_指向B.prototype,即A的实例
+    console.log(a.fun());//先去a对象内部找fun方法，找到了，所以调用本对象内部的fun方法； 运行结果：aaaa
+    console.log(b.fun());//先去b对象内部找fun方法，找到了，所以调用本对象内部的fun方法； 运行结果：bbbb
+    console.log(b.funp());//先去b对象内部找funp方法，找到了，所以调用本对象内部的funp方法； 运行结果：22
+    console.log(a.funp());//先去a对象内部找funp方法，没找到，所以从本对象的\_\_proto\_\_对象找，找到了，本对象也有age属性 运行结果：11
+    console.log(a.funm());//先去a对象内部找funm方法，找到了，但是a对象本身没有sex属性，所以从\_\_proto\_\_对象找，找到了; 运行结果：男
+
+    //    function A(name) {
+//        this.name = name;
+//        this.fun = function(){
+//            alert(this.name);
+//        }
+//    }
+//    var obbj = {name:"lzt"};
+//    var arr = new Array(2,3);
+//    console.log($.type(A.prototype));
+//    console.log(obbj.prototype);
+//    console.log(arr.prototype);
+//    function B(name) {
+//        this.name = name;
+//        this.fun = function(){
+//            alert(this.name);
+//        }
+//    }
+//    var aobj = new A('aaaa');
+//    aobj.fun();
+//    B.prototype = aobj;
+//    var bobj = new B('bbbb');
+//    bobj.fun();
+//
+//    bobj.fun.call(aobj);
+
+
+//function myObject(msg){
+//    //特权属性(公有属性)
+//    this.myMsg = msg; //只在被实例化后的实例中可调用
+//    this.address = '上海';
+//
+//    //私有属性
+//    var name = '豪情';
+//    var age = 29;
+//    var that = this;
+//
+//    //私有方法
+//    function sayName(){
+//        alert(that.name);
+//    }
+//    //特权方法(公有方法)
+//    //能被外部公开访问
+//    //这个方法每次实例化都要重新构造而prototype是原型共享，所有实例化后，都共同引用同一个
+//    this.sayAge = function(){
+//        alert(name); //在公有方法中可以访问私有成员
+//    }
+//    //私有和特权成员在函数的内部，在构造函数创建的每个实例中都会包含同样的私有和特权成员的副本，
+//    //因而实例越多占用的内存越多
+//}
+
+//    var obj = new myObject("浪漫");
+//    console.log(obj);
+
+
+//    myObject.prototype.sayHello = function(){
+//        alert('hello everyone!');
+//    }
+//
+//    console.log(myObject);
+//    myObject.names = 'china';
+//    //静态方法
+//    myObject.alertname = function(){
+//        alert(this.name);
+//    }
+//    console.log(myObject.names);
+//    console.log(obj.names);
+//    console.log(myObject.alertname);
+
+//定义类方法
+function Animal(name) {
+    var age = 10;
+    this.name = name;
+    this.getAge = function(){
+        return age;
+    }
+}
+//Animal.prototype 是一个仅含一个方法的对象
+//Animal.prototype.swimming = function() {
+//    console.log("I'm '"+this.name+"' from Animal");
+//};
+
+//建一个Animal实例
+var dog = new Animal("小黄");
+/*******************************
+ * new操作符的操作是
+ * var dog = {} //初始化一个对象p
+ * p.__proto__ =  Animal.prototype //将Animal方法（也是一个对象）的prototype属性给__proto__
+ * Animal.call(p) //用p对象引用Animal方法中的this对象;
+ * ***********************************************/
+//Animal.prototype = {"name":"sdfsfsdf",fun:function(){}};
+
+function mm() {
+
+}
+console.log(dog);
+console.log(Animal);
+console.log(Animal.prototype);
+console.log(dog.__proto__.constructor);
+console.log(dog.hasOwnProperty("name"));
+
+console.log(Animal.__proto__);
+console.log(Function.prototype===Animal.__proto__)
+console.log("-----------------------");
+console.log(Function.prototype.__proto__);
+console.log(Function.__proto__)
+console.log(Animal.prototype.__proto__===Object.prototype);
+var str = "sdfsfdf";
+console.log(str);
+console.log(str.__proto__);
+function Fish(name) {
+    this.name=name;
+}
+var fish1 = new Fish("鲤鱼");
+Fish.prototype.swimming = function(){
+    console.log("I'm '"+this.name+"' from Fish");
+}
+
+fish1.swimming();
+Fish.prototype = new Animal("金鱼");
+dog.swimming();
+fish1.swimming();
+</script>
+
+</body>
+</html>
