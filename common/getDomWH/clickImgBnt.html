@@ -7,17 +7,23 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script src="../../jquery-1.11.3.min.js"></script>
 </head>
-<body>
-    <div>
-        <img src="jfdz.jpg" style="width: 100%;height: 100%;"><!---->
+<body style="width: 1600px;height: 800px;background: dodgerblue;">
+    <div style="width: 100%;height: 100%;background: url('jfdz.jpg');
+      background-position: right center;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+  ">
+       <!-- -->
     </div>
+    <!--<img src="jfdz.jpg" style="width: 100%;height: 100%;">-->
     <script src="getMousePosition.js"></script>
     <script>
         var fCallBack = function(){
             alert("select");
         }
-        $("img").fTriggerEveByDomPosition(1424,562,[{l:956,t:150,r:1142,b:195},{l:573,t:95,r:612,b:133}],fCallBack);
+        $("div").fTriggerEveByDomPosition(1424,562,[{l:956,t:150,r:1142,b:195},{l:573,t:95,r:612,b:133}],fCallBack);
 
+        console.log($("div").css("backgroundPosition"));
     </script>
 
 
